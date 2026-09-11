@@ -3,107 +3,277 @@
 import { motion } from 'framer-motion';
 import { StatCard } from '@/components/shared/StatCard';
 import { revenueData, viewsData, topProducts } from '@/lib/mock-data';
-import { IndianRupee, ShoppingBag, Eye, TrendingUp, Zap, Package } from 'lucide-react';
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell } from 'recharts';
+import { IndianRupee, ShoppingBag, Eye, TrendingUp, Zap, Package, ArrowUpRight } from 'lucide-react';
+import {
+  LineChart,
+  Line,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts';
 
 const conversionData = [
-  { stage: 'Views', value: 1248 },
-  { stage: 'Cart', value: 186 },
-  { stage: 'Orders', value: 18 },
+  { stage: 'Specimen Views', value: 1248 },
+  { stage: 'Bag Additions', value: 186 },
+  { stage: 'Paid Orders', value: 18 },
 ];
 
 const pieData = [
-  { name: 'Kalamkari Bag', value: 8, color: '#a855f7' },
-  { name: 'Cushion Covers', value: 6, color: '#ec4899' },
-  { name: 'Saree', value: 2, color: '#f59e0b' },
-  { name: 'Wall Art', value: 1, color: '#14b8a6' },
+  { name: 'Kalamkari Handbags', value: 8, color: '#f59e0b' },
+  { name: 'Embroidered Cushion Covers', value: 6, color: '#10b981' },
+  { name: 'Chanderi Silk Sarees', value: 2, color: '#6366f1' },
+  { name: 'Hand-painted Wall Hangings', value: 1, color: '#06b6d4' },
 ];
 
 export default function SellerAnalyticsPage() {
   return (
-    <div className="space-y-6">
-      <div><h1 className="text-2xl font-bold">Analytics</h1><p className="text-sm text-gray-500 mt-1">Track your store performance</p></div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <StatCard label="Revenue" value="₹24,850" icon={<IndianRupee className="w-5 h-5" />} trend="18.4%" trendUp gradient="bg-gradient-to-br from-orange-400 to-orange-600" />
-        <StatCard label="Orders" value="18" icon={<ShoppingBag className="w-5 h-5" />} trend="12.2%" trendUp gradient="bg-gradient-to-br from-purple-400 to-purple-600" />
-        <StatCard label="Views" value="1,248" icon={<Eye className="w-5 h-5" />} trend="8.1%" trendUp gradient="bg-gradient-to-br from-teal-400 to-teal-600" />
-        <StatCard label="Conversion" value="1.4%" icon={<TrendingUp className="w-5 h-5" />} gradient="bg-gradient-to-br from-pink-400 to-pink-600" />
+    <div className="space-y-6 text-white">
+      <div>
+        <h1 className="text-2xl font-bold">Financial Telemetry & Analytics</h1>
+        <p className="text-xs text-zinc-400 mt-1 font-mono">
+          Real-time performance tracking and direct artisan income realization
+        </p>
       </div>
 
+      {/* Metrics Ribbon */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+        <StatCard
+          label="Gross Revenue"
+          value="₹24,850"
+          icon={<IndianRupee className="w-5 h-5" />}
+          trend="+18.4%"
+          trendUp={true}
+        />
+        <StatCard
+          label="Delivered Orders"
+          value="18"
+          icon={<ShoppingBag className="w-5 h-5" />}
+          trend="+12.2%"
+          trendUp={true}
+        />
+        <StatCard
+          label="Unique Patrons"
+          value="1,248"
+          icon={<Eye className="w-5 h-5" />}
+          trend="+8.1%"
+          trendUp={true}
+        />
+        <StatCard
+          label="Conversion Velocity"
+          value="1.44%"
+          icon={<TrendingUp className="w-5 h-5" />}
+          trend="+0.3%"
+          trendUp={true}
+        />
+      </div>
+
+      {/* Main Charts */}
       <div className="grid lg:grid-cols-2 gap-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="p-5 rounded-2xl bg-white/80 border border-purple-100/60">
-          <h3 className="font-bold text-sm mb-4">Revenue Over Time</h3>
+        {/* Revenue Over Time */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-semibold text-sm text-white">Net Income Progression</h3>
+              <p className="text-[11px] text-zinc-400 font-mono">Artisan monthly take-home payouts</p>
+            </div>
+            <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              Zero Commission
+            </span>
+          </div>
+
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={revenueData}>
-              <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#a855f7" stopOpacity={0.4} /><stop offset="100%" stopColor="#a855f7" stopOpacity={0} /></linearGradient></defs>
-              <CartesianGrid vertical={false} stroke="#f3e8ff" />
-              <XAxis dataKey="month" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #f3e8ff', fontSize: 12 }} />
-              <Area type="monotone" dataKey="revenue" stroke="#a855f7" strokeWidth={2} fill="url(#revGrad)" />
+              <defs>
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.04)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#161922',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12,
+                  fontSize: 12,
+                  color: '#fff',
+                }}
+              />
+              <Area type="monotone" dataKey="revenue" stroke="#f59e0b" strokeWidth={2.5} fill="url(#revGrad)" />
             </AreaChart>
           </ResponsiveContainer>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="p-5 rounded-2xl bg-white/80 border border-purple-100/60">
-          <h3 className="font-bold text-sm mb-4">Orders Over Time</h3>
+        {/* Order Volumes */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-semibold text-sm text-white">Order Volume by Month</h3>
+              <p className="text-[11px] text-zinc-400 font-mono">Direct patron acquisitions</p>
+            </div>
+          </div>
+
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={revenueData}>
-              <CartesianGrid vertical={false} stroke="#fce7f3" />
-              <XAxis dataKey="month" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #fce7f3', fontSize: 12 }} />
-              <Bar dataKey="orders" fill="#ec4899" radius={[8, 8, 0, 0]} />
+              <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.04)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#161922',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12,
+                  fontSize: 12,
+                  color: '#fff',
+                }}
+              />
+              <Bar dataKey="orders" fill="#d97706" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
       </div>
 
+      {/* Funnel & Product Share */}
       <div className="grid lg:grid-cols-2 gap-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="p-5 rounded-2xl bg-white/80 border border-purple-100/60">
-          <h3 className="font-bold text-sm mb-4">Conversion Funnel</h3>
-          <ResponsiveContainer width="100%" height={200}>
+        {/* Funnel */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+        >
+          <h3 className="font-semibold text-sm text-white mb-1">Patron Conversion Funnel</h3>
+          <p className="text-[11px] text-zinc-400 font-mono mb-4">Visitor retention to purchase completion</p>
+
+          <ResponsiveContainer width="100%" height={180}>
             <BarChart data={conversionData} layout="vertical">
               <XAxis type="number" hide />
-              <YAxis dataKey="stage" type="category" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} width={60} />
-              <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #f3e8ff', fontSize: 12 }} />
-              <Bar dataKey="value" radius={[0, 8, 8, 0]}>
-                {conversionData.map((_, i) => <Cell key={i} fill={['#a855f7', '#ec4899', '#f59e0b'][i]} />)}
+              <YAxis
+                dataKey="stage"
+                type="category"
+                tick={{ fontSize: 11, fill: '#a1a1aa' }}
+                axisLine={false}
+                tickLine={false}
+                width={100}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#161922',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12,
+                  fontSize: 12,
+                  color: '#fff',
+                }}
+              />
+              <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+                {conversionData.map((_, i) => (
+                  <Cell key={i} fill={['#f59e0b', '#d97706', '#10b981'][i]} />
+                ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="p-5 rounded-2xl bg-white/80 border border-purple-100/60">
-          <h3 className="font-bold text-sm mb-4">Sales by Product</h3>
-          <ResponsiveContainer width="100%" height={200}>
+        {/* Share by Craft Category */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+        >
+          <h3 className="font-semibold text-sm text-white mb-1">Revenue Share by Craft Line</h3>
+          <p className="text-[11px] text-zinc-400 font-mono mb-2">Category distribution</p>
+
+          <ResponsiveContainer width="100%" height={150}>
             <PieChart>
-              <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70} innerRadius={40}>
-                {pieData.map((d, i) => <Cell key={i} fill={d.color} />)}
+              <Pie
+                data={pieData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={60}
+                innerRadius={35}
+                stroke="none"
+              >
+                {pieData.map((d, i) => (
+                  <Cell key={i} fill={d.color} />
+                ))}
               </Pie>
-              <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #f3e8ff', fontSize: 12 }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#161922',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12,
+                  fontSize: 12,
+                  color: '#fff',
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {pieData.map((d) => <span key={d.name} className="flex items-center gap-1 text-xs text-gray-600"><span className="w-2.5 h-2.5 rounded-full" style={{ background: d.color }} /> {d.name}</span>)}
+
+          <div className="flex flex-wrap gap-3 mt-1 justify-center">
+            {pieData.map((d) => (
+              <span key={d.name} className="flex items-center gap-1.5 text-[11px] text-zinc-300">
+                <span className="w-2 h-2 rounded-full" style={{ background: d.color }} />
+                <span>{d.name}</span>
+              </span>
+            ))}
           </div>
         </motion.div>
       </div>
 
-      {/* AI Insights */}
-      <div className="space-y-3">
+      {/* AI Actionable Directives */}
+      <div className="space-y-2.5">
+        <h3 className="font-semibold text-xs text-zinc-400 uppercase tracking-wider font-mono">
+          Automated Revenue Directives
+        </h3>
         {[
-          { icon: Zap, text: 'Your Kalamkari bags are receiving 34% more views than your other products.', color: 'from-purple-500 to-pink-500' },
-          { icon: TrendingUp, text: 'Demand appears to be increasing for handmade bags. Consider producing 3–5 more units this week.', color: 'from-teal-500 to-cyan-500' },
-          { icon: Package, text: 'Your cushion covers have a high view-to-cart ratio. Consider bundling them as a set.', color: 'from-orange-500 to-pink-500' },
-        ].map((insight, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 + i * 0.05 }} className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100/60">
-            <div className="flex items-start gap-3">
-              <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${insight.color} flex items-center justify-center shrink-0`}><insight.icon className="w-4 h-4 text-white" /></div>
-              <p className="text-sm text-gray-700 pt-1.5">{insight.text}</p>
+          {
+            title: 'Kalamkari Demand Spurt',
+            text: 'Your Kalamkari bags are generating 34% more views than regional craft baseline. High probability of price elasticity up to ₹1,750.',
+            tag: 'Pricing Opportunity',
+          },
+          {
+            title: 'Bundle Opportunity',
+            text: 'Cushion covers are viewed in pairs 68% of the time. Adding a "Set of 2" listing will increase average order value by ₹800.',
+            tag: 'Catalog Strategy',
+          },
+        ].map((item, i) => (
+          <div key={i} className="p-4 rounded-2xl bg-[#10121A] border border-white/[0.08] flex items-start gap-3.5">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 mt-0.5">
+              <Zap className="w-4 h-4" />
             </div>
-          </motion.div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-bold text-white">{item.title}</p>
+                <span className="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                  {item.tag}
+                </span>
+              </div>
+              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">{item.text}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>

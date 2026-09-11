@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface StatCardProps {
@@ -9,35 +10,43 @@ interface StatCardProps {
   icon: React.ReactNode;
   trend?: string;
   trendUp?: boolean;
-  gradient: string;
+  gradient?: string;
   delay?: number;
 }
 
-export function StatCard({ label, value, icon, trend, trendUp, gradient, delay = 0 }: StatCardProps) {
+export function StatCard({ label, value, icon, trend, trendUp = true, delay = 0 }: StatCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      className={cn(
-        'relative overflow-hidden rounded-2xl p-5 text-white shadow-lg',
-        gradient
-      )}
+      transition={{ duration: 0.35, delay }}
+      whileHover={{ y: -2 }}
+      className="relative overflow-hidden rounded-2xl p-5 bg-[#10121A] border border-white/[0.08] hover:border-white/[0.16] transition-all shadow-lg"
     >
-      <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/10 blur-xl" />
-      <div className="absolute -left-4 -bottom-4 w-20 h-20 rounded-full bg-white/5 blur-xl" />
-      <div className="relative flex items-start justify-between">
+      <div className="flex items-start justify-between">
         <div>
-          <p className="text-white/80 text-sm font-medium">{label}</p>
-          <p className="text-2xl font-bold mt-1">{value}</p>
+          <p className="text-zinc-400 text-xs font-medium uppercase tracking-wider">{label}</p>
+          <p className="text-2xl sm:text-3xl font-bold font-mono text-white mt-1.5 tracking-tight">{value}</p>
           {trend && (
-            <p className={cn('text-xs mt-1 font-medium', trendUp ? 'text-white/90' : 'text-white/70')}>
-              {trendUp ? '↑' : '↓'} {trend}
-            </p>
+            <div className="flex items-center gap-1.5 mt-2">
+              <span
+                className={cn(
+                  'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold font-mono',
+                  trendUp
+                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                    : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                )}
+              >
+                {trendUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                {trend}
+              </span>
+              <span className="text-[11px] text-zinc-500">vs last cycle</span>
+            </div>
           )}
         </div>
-        <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">{icon}</div>
+        <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-amber-400">
+          {icon}
+        </div>
       </div>
     </motion.div>
   );

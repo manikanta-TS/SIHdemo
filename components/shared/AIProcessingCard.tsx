@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Check, Cpu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface AIProcessingCardProps {
@@ -14,25 +14,32 @@ interface AIProcessingCardProps {
 export function AIProcessingCard({ title, steps, currentStep, className }: AIProcessingCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       className={cn(
-        'relative overflow-hidden rounded-2xl border-2 border-purple-300/50 bg-gradient-to-br from-purple-50 via-white to-pink-50 p-6 shadow-lg',
+        'relative overflow-hidden rounded-2xl border border-amber-500/30 bg-[#0F1118]/95 backdrop-blur-xl p-6 shadow-2xl',
         className
       )}
     >
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 animate-pulse" />
+      {/* Top glowing laser line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent animate-pulse" />
+
+      <div className="relative flex items-center justify-between mb-5 pb-3 border-b border-white/[0.08]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <Cpu className="w-4 h-4 animate-pulse" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-white text-sm">{title}</h3>
+            <p className="text-[11px] text-zinc-400 font-mono">Neural Vision Pipeline Active</p>
+          </div>
+        </div>
+
+        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          STAGE {Math.min(currentStep + 1, steps.length)} / {steps.length}
+        </span>
       </div>
-      <div className="relative flex items-center gap-2 mb-4">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-        >
-          <Sparkles className="w-5 h-5 text-purple-600" />
-        </motion.div>
-        <h3 className="font-bold text-purple-900">{title}</h3>
-      </div>
+
       <div className="space-y-3">
         {steps.map((step, i) => {
           const done = i < currentStep;
@@ -41,37 +48,39 @@ export function AIProcessingCard({ title, steps, currentStep, className }: AIPro
             <div key={i} className="flex items-center gap-3">
               <div
                 className={cn(
-                  'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-colors',
+                  'w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono font-bold transition-all',
                   done
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-400'
                     : active
-                    ? 'bg-purple-500 text-white'
-                    : 'bg-gray-200 text-gray-400'
+                    ? 'bg-amber-500 text-black shadow-[0_0_12px_#f59e0b]'
+                    : 'bg-white/[0.04] border border-white/[0.08] text-zinc-500'
                 )}
               >
-                {done ? '✓' : i + 1}
+                {done ? <Check className="w-3.5 h-3.5" /> : i + 1}
               </div>
               <span
                 className={cn(
-                  'text-sm transition-colors',
-                  done ? 'text-gray-600' : active ? 'text-purple-900 font-semibold' : 'text-gray-400'
+                  'text-xs transition-colors',
+                  done
+                    ? 'text-zinc-400'
+                    : active
+                    ? 'text-amber-300 font-semibold'
+                    : 'text-zinc-600'
                 )}
               >
                 {step}
               </span>
               {active && (
-                <motion.div
-                  className="ml-auto flex gap-1"
-                >
+                <div className="ml-auto flex items-center gap-1">
                   {[0, 1, 2].map((d) => (
                     <motion.span
                       key={d}
-                      className="w-1.5 h-1.5 rounded-full bg-purple-500"
-                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      className="w-1.5 h-1.5 rounded-full bg-amber-400"
+                      animate={{ opacity: [0.2, 1, 0.2] }}
                       transition={{ duration: 1, repeat: Infinity, delay: d * 0.2 }}
                     />
                   ))}
-                </motion.div>
+                </div>
               )}
             </div>
           );

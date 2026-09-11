@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { AppProvider } from '@/lib/store';
+import { CommandPalette } from '@/components/shared/CommandPalette';
+import { Toaster } from 'sonner';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -9,9 +11,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Hastkala — From Artisan to Market, Powered by AI',
+  title: 'Hastkala — AI-Driven Market Linkage for Artisans',
   description:
-    'AI-Driven Market Linkage and Smart Cataloging for Marginalized Artisans. Empowering Hands. Connecting Markets.',
+    'Smart India Hackathon Finalist — Autonomous craft recognition, pricing intelligence, and multilingual digital storefront generation.',
 };
 
 export default function RootLayout({
@@ -20,9 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={jakarta.className}>
-        <AppProvider>{children}</AppProvider>
+    <html lang="en" className="dark">
+      <body className={`${jakarta.className} bg-[#08090D] text-white selection:bg-amber-500/20 selection:text-amber-300 min-h-screen antialiased`}>
+        <AppProvider>
+          {children}
+          <CommandPalette />
+          <Toaster theme="dark" position="bottom-right" richColors />
+        </AppProvider>
       </body>
     </html>
   );
