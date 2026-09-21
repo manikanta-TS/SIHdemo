@@ -17,14 +17,11 @@ import {
   MapPin,
   Truck,
   Package,
-  Check,
   BadgeCheck,
   ArrowLeft,
   Store,
-  Sparkles,
   ShieldCheck,
   Award,
-  Layers,
   Info,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -52,22 +49,22 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="space-y-8 text-white max-w-6xl mx-auto">
+    <div className="space-y-8 text-stone-900 max-w-6xl mx-auto">
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+        className="flex items-center gap-2 text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Catalog
       </button>
 
-      {/* Main Specimen Presentation */}
+      {/* Main Presentation */}
       <div className="grid lg:grid-cols-2 gap-10">
         {/* Visual Gallery */}
         <div className="space-y-3">
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative aspect-square rounded-3xl overflow-hidden bg-zinc-900 border border-white/[0.08] shadow-2xl"
+            className="relative aspect-square rounded-3xl overflow-hidden bg-stone-100 border border-stone-200/90 shadow-md"
           >
             <Image
               src={product.images[selectedImage] || product.image}
@@ -88,9 +85,10 @@ export default function ProductDetailPage() {
                 key={i}
                 onClick={() => setSelectedImage(i)}
                 className={cn(
-                  'relative w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 bg-zinc-900',
-                  selectedImage === i ? 'border-amber-400 shadow-md shadow-amber-400/20' : 'border-transparent opacity-70 hover:opacity-100'
+                  'relative w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 bg-stone-100',
+                  selectedImage === i ? 'border-amber-600 shadow-sm' : 'border-transparent opacity-70 hover:opacity-100'
                 )}
+                aria-label={`View image ${i + 1}`}
               >
                 <Image src={img} alt="" fill className="object-cover" sizes="80px" />
               </button>
@@ -98,113 +96,115 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Specimen Dossier & Buying Action */}
+        {/* Craft Details & Purchase Actions */}
         <div className="space-y-6">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs text-amber-400">
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs text-amber-800">
               <span className="font-semibold uppercase tracking-wider">{product.craft}</span>
-              <span>·</span>
-              <span className="text-zinc-400">{product.category}</span>
+              <span className="text-stone-300">·</span>
+              <span className="text-stone-500">{product.category}</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-serif font-bold text-stone-900 leading-tight">
               {product.name}
             </h1>
 
-            <div className="flex items-center gap-3 mt-2.5 text-xs text-zinc-400">
-              <Link href={`/buyer/artisans/${artisan.id}`} className="text-zinc-300 font-medium hover:text-amber-400 transition-colors">
+            <div className="flex items-center gap-3 mt-2.5 text-xs text-stone-500">
+              <Link href={`/buyer/artisans/${artisan.id}`} className="text-stone-800 font-medium hover:text-amber-800 transition-colors">
                 By {product.artisanName}
               </Link>
-              <span>·</span>
+              <span className="text-stone-300">·</span>
               <div className="flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                <span className="font-bold text-white">{product.rating}</span>
-                <span className="text-zinc-500">({product.reviews} reviews)</span>
+                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                <span className="font-bold text-stone-900">{product.rating}</span>
+                <span className="text-stone-400">({product.reviews} reviews)</span>
               </div>
-              <span>·</span>
+              <span className="text-stone-300">·</span>
               <span className="flex items-center gap-1 font-mono">
-                <MapPin className="w-3 h-3 text-amber-400" /> {product.artisanState}
+                <MapPin className="w-3 h-3 text-amber-700" /> {product.artisanState}
               </span>
             </div>
           </div>
 
           {/* Pricing */}
-          <div className="p-4 rounded-2xl bg-[#10121A] border border-white/[0.08] flex items-baseline justify-between">
+          <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-stone-200/90 flex items-baseline justify-between shadow-xs">
             <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-extrabold font-mono text-white">₹{product.price.toLocaleString('en-IN')}</span>
+              <span className="text-3xl font-extrabold font-mono text-stone-900">₹{product.price.toLocaleString('en-IN')}</span>
               {product.originalPrice && (
                 <>
-                  <span className="text-sm text-zinc-500 line-through font-mono">
+                  <span className="text-sm text-stone-400 line-through font-mono">
                     ₹{product.originalPrice.toLocaleString('en-IN')}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    {Math.round((1 - product.price / product.originalPrice) * 100)}% Middleman Arbitrage Saved
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    {Math.round((1 - product.price / product.originalPrice) * 100)}% Discount vs Retail
                   </span>
                 </>
               )}
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" /> 100% Direct Payout
+            <span className="text-[11px] font-mono text-emerald-800 font-semibold flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" /> 100% Direct Payout
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
             {product.description}
           </p>
 
-          {/* Specimen Technical Matrix */}
-          <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-[#10121A] border border-white/[0.08] text-xs">
+          {/* Craft Specifications */}
+          <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-white border border-stone-200/90 text-xs shadow-sm">
             <div>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase">Material Composition</span>
-              <p className="font-semibold text-white mt-0.5">{product.material}</p>
+              <span className="text-[10px] font-mono text-stone-400 uppercase font-semibold">Material Composition</span>
+              <p className="font-semibold text-stone-900 mt-0.5">{product.material}</p>
             </div>
             <div>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase">Weaving / Dye Technique</span>
-              <p className="font-semibold text-white mt-0.5">{product.technique}</p>
+              <span className="text-[10px] font-mono text-stone-400 uppercase font-semibold">Weaving / Dye Technique</span>
+              <p className="font-semibold text-stone-900 mt-0.5">{product.technique}</p>
             </div>
             <div>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase">Dimensions</span>
-              <p className="font-semibold text-white mt-0.5">{product.dimensions}</p>
+              <span className="text-[10px] font-mono text-stone-400 uppercase font-semibold">Dimensions</span>
+              <p className="font-semibold text-stone-900 mt-0.5">{product.dimensions}</p>
             </div>
             <div>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase">Artisan Availability</span>
-              <p className="font-semibold text-emerald-400 font-mono mt-0.5">{product.stock} units hand-finished</p>
+              <span className="text-[10px] font-mono text-stone-400 uppercase font-semibold">Workshop Availability</span>
+              <p className="font-semibold text-emerald-800 font-mono mt-0.5">{product.stock} units hand-finished</p>
             </div>
           </div>
 
           {/* Transparent Economic Breakdown */}
-          <div className="p-4 rounded-2xl bg-amber-500/[0.04] border border-amber-500/20 text-xs space-y-2">
-            <div className="flex items-center justify-between text-[11px] font-mono font-semibold text-amber-300">
+          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs space-y-2">
+            <div className="flex items-center justify-between text-[11px] font-mono font-semibold text-amber-900">
               <span className="flex items-center gap-1.5">
-                <Info className="w-3.5 h-3.5 text-amber-400" /> Transparent Economic Allocation
+                <Info className="w-3.5 h-3.5 text-amber-700" /> Fair-Trade Cost Allocation
               </span>
-              <span>Fair-Trade Model</span>
+              <span className="text-stone-500 font-normal">Direct Remuneration</span>
             </div>
-            <div className="h-1.5 rounded-full bg-white/10 overflow-hidden flex">
-              <div className="bg-amber-400 w-[75%]" title="75% Direct to Artisan" />
-              <div className="bg-emerald-400 w-[15%]" title="15% Raw Material & Logistics" />
-              <div className="bg-zinc-500 w-[10%]" title="10% Escrow & Insurance" />
+            <div className="h-2 rounded-full bg-stone-200 overflow-hidden flex">
+              <div className="bg-amber-600 w-[78%]" title="78% Direct to Artisan Household" />
+              <div className="bg-emerald-600 w-[12%]" title="12% Raw Materials & Natural Dyes" />
+              <div className="bg-stone-400 w-[10%]" title="10% Insured Packaging & Transit" />
             </div>
-            <div className="flex justify-between text-[10px] font-mono text-zinc-400 pt-0.5">
-              <span>₹{Math.round(product.price * 0.75)} Direct to Artisan</span>
-              <span>₹{Math.round(product.price * 0.15)} Materials/Transit</span>
-              <span>₹{Math.round(product.price * 0.10)} Escrow</span>
+            <div className="flex justify-between text-[10px] font-mono text-stone-600 pt-0.5">
+              <span>₹{Math.round(product.price * 0.78).toLocaleString('en-IN')} Direct to Maker</span>
+              <span>₹{Math.round(product.price * 0.12).toLocaleString('en-IN')} Raw Materials</span>
+              <span>₹{Math.round(product.price * 0.10).toLocaleString('en-IN')} Safe Transit</span>
             </div>
           </div>
 
           {/* Action Row */}
           <div className="flex items-center gap-3 pt-2">
-            <div className="flex items-center gap-1 border border-white/10 rounded-xl p-1 bg-white/[0.03]">
+            <div className="flex items-center gap-1 border border-stone-200 rounded-xl p-1 bg-[#FAF7F2] shadow-xs">
               <button
                 onClick={() => setQty(Math.max(1, qty - 1))}
-                className="p-1.5 rounded-lg hover:bg-white/10 text-zinc-300 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-stone-200 text-stone-700 transition-colors"
+                aria-label="Decrease quantity"
               >
                 <Minus className="w-3.5 h-3.5" />
               </button>
-              <span className="w-7 text-center font-mono font-bold text-xs">{qty}</span>
+              <span className="w-7 text-center font-mono font-bold text-xs text-stone-900">{qty}</span>
               <button
                 onClick={() => setQty(qty + 1)}
-                className="p-1.5 rounded-lg hover:bg-white/10 text-zinc-300 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-stone-200 text-stone-700 transition-colors"
+                aria-label="Increase quantity"
               >
                 <Plus className="w-3.5 h-3.5" />
               </button>
@@ -212,15 +212,15 @@ export default function ProductDetailPage() {
 
             <button
               onClick={handleAddToCart}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-white font-semibold text-xs transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white hover:bg-stone-50 border border-stone-300 text-stone-800 font-semibold text-xs transition-colors shadow-sm"
             >
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4 text-stone-600" />
               <span>Add to Bag</span>
             </button>
 
             <button
               onClick={handleBuyNow}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shadow-lg shadow-amber-500/20 transition-all"
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/20 active:scale-95 transition-all"
             >
               <span>Instant Checkout</span>
             </button>
@@ -231,46 +231,46 @@ export default function ProductDetailPage() {
                 toast(isWishlisted ? 'Removed from saved pieces' : 'Saved to wishlist');
               }}
               className={cn(
-                'p-3 rounded-xl border transition-colors',
+                'p-3 rounded-xl border transition-colors shadow-sm',
                 isWishlisted
-                  ? 'border-rose-500/50 bg-rose-500/10 text-rose-400'
-                  : 'border-white/[0.08] bg-white/[0.03] text-zinc-400 hover:text-white'
+                  ? 'border-rose-300 bg-rose-50 text-rose-600'
+                  : 'border-stone-200 bg-white text-stone-500 hover:text-stone-900'
               )}
-              aria-label="Wishlist"
+              aria-label="Wishlist toggle"
             >
-              <Heart className={cn('w-4 h-4', isWishlisted && 'fill-current')} />
+              <Heart className={cn('w-4 h-4', isWishlisted && 'fill-current text-rose-600')} />
             </button>
           </div>
 
           {/* Guarantee Badges */}
-          <div className="flex flex-wrap gap-4 pt-2 text-[11px] font-mono text-zinc-400 border-t border-white/[0.06]">
-            <span className="flex items-center gap-1.5"><Truck className="w-3.5 h-3.5 text-amber-400" /> Insured Pan-India Transit</span>
-            <span className="flex items-center gap-1.5"><Package className="w-3.5 h-3.5 text-emerald-400" /> Tamper-Proof Artisan Packaging</span>
-            <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-cyan-400" /> GI Seal Authenticity Certificate</span>
+          <div className="flex flex-wrap gap-4 pt-2 text-[11px] font-mono text-stone-500 border-t border-stone-200/80">
+            <span className="flex items-center gap-1.5"><Truck className="w-3.5 h-3.5 text-amber-700" /> Insured Pan-India Delivery</span>
+            <span className="flex items-center gap-1.5"><Package className="w-3.5 h-3.5 text-emerald-700" /> Tamper-Proof Packaging</span>
+            <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-indigo-700" /> GI Seal Authenticity Certificate</span>
           </div>
         </div>
       </div>
 
       {/* Meet the Artisan Banner */}
-      <div className="p-6 rounded-3xl bg-[#10121A] border border-white/[0.08] flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-white/10 shrink-0 bg-zinc-800">
+      <div className="p-6 rounded-3xl bg-white border border-stone-200/90 shadow-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-stone-200 shrink-0 bg-stone-100">
           <Image src={artisan.image} alt={artisan.name} fill className="object-cover" />
         </div>
         <div className="flex-1 space-y-2 text-center sm:text-left">
           <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
-            <h2 className="text-lg font-bold text-white">Crafted by Master Artisan {artisan.name}</h2>
-            {artisan.verified && <BadgeCheck className="w-4 h-4 text-cyan-400" />}
+            <h2 className="text-lg font-serif font-bold text-stone-900">Crafted by Master Artisan {artisan.name}</h2>
+            {artisan.verified && <BadgeCheck className="w-4 h-4 text-emerald-600" />}
           </div>
-          <p className="text-xs text-zinc-400 font-mono">
+          <p className="text-xs text-stone-500 font-mono">
             {artisan.village}, {artisan.state} · {artisan.yearsExperience} Years Experience
           </p>
-          <p className="text-xs text-zinc-300 leading-relaxed max-w-xl">{artisan.story}</p>
+          <p className="text-xs text-stone-600 leading-relaxed max-w-xl">{artisan.story}</p>
           <div className="pt-2">
             <Link
               href={`/buyer/artisans/${artisan.id}`}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-amber-800 hover:text-amber-900 hover:underline"
             >
-              <Store className="w-3.5 h-3.5" /> View Artisan Guild & Full Catalog →
+              <Store className="w-3.5 h-3.5" /> View Artisan Guild &amp; Full Catalog →
             </Link>
           </div>
         </div>

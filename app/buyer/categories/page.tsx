@@ -90,52 +90,52 @@ export default function CategoriesPage() {
   });
 
   return (
-    <div className="space-y-10 pb-16">
+    <div className="space-y-10 pb-16 text-stone-900">
       {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#151824] to-[#0D0E15] p-8 md:p-12">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden rounded-3xl border border-stone-200/90 bg-gradient-to-br from-[#FFFDF9] via-[#FAF6EE] to-[#F5EFE4] p-8 md:p-12 shadow-sm">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-700/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400 mb-4">
-            <Layers className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/80 bg-amber-100/70 px-3 py-1 text-xs font-medium text-amber-900 mb-4 shadow-xs">
+            <Layers className="w-3.5 h-3.5 text-amber-700" />
             <span>Curated Guilds & Traditions</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white font-serif">
-            The Craft <span className="italic font-light text-amber-400">Atlas</span>
+          <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight text-stone-900">
+            The Craft <span className="italic font-normal text-amber-800">Atlas</span>
           </h1>
 
-          <p className="mt-3 text-sm md:text-base text-zinc-400 leading-relaxed max-w-2xl">
+          <p className="mt-3 text-sm md:text-base text-stone-600 leading-relaxed max-w-2xl">
             Explore India’s timeless artisanal disciplines. Every guild represents centuries of verified
             lineage, sovereign intellectual property, and authentic Geographical Indications.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 max-w-lg">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <Input
                 placeholder="Search craft guilds, regions, or materials..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-11 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:ring-amber-500/50 rounded-xl"
+                className="pl-10 h-11 bg-white border-stone-200/90 text-stone-900 placeholder:text-stone-400 focus-visible:ring-amber-700/30 rounded-xl shadow-sm"
               />
             </div>
           </div>
         </div>
 
         {/* Aggregate Stats Pill */}
-        <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-wrap items-center gap-6 text-xs text-zinc-400">
+        <div className="mt-8 pt-6 border-t border-stone-200/80 flex flex-wrap items-center gap-6 text-xs text-stone-500 font-mono">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <ShieldCheck className="w-4 h-4 text-emerald-700" />
             <span>100% GI-Tagged Lineages</span>
           </div>
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-amber-400" />
+            <Sparkles className="w-4 h-4 text-amber-700" />
             <span>8 Master Guild Disciplines</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-mono text-zinc-200">{products.length}</span> Masterworks Indexed
+            <span className="font-mono text-stone-800 font-bold">{products.length}</span> Masterworks Indexed
           </div>
         </div>
       </div>
@@ -157,35 +157,32 @@ export default function CategoriesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -4 }}
               className="group h-full"
             >
               <Link
                 href={`/buyer/explore?category=${encodeURIComponent(cat.name)}`}
-                className="flex flex-col justify-between h-full rounded-2xl border border-white/[0.08] bg-[#10121A]/80 hover:bg-[#151824] hover:border-amber-500/40 p-6 transition-all duration-300 shadow-lg hover:shadow-amber-500/5 backdrop-blur-sm relative overflow-hidden"
+                className="flex flex-col justify-between h-full rounded-2xl border border-stone-200/90 bg-white hover:border-amber-700/40 p-6 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-stone-900/5 relative overflow-hidden"
               >
-                {/* Subtle top edge accent glow */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/0 group-hover:via-amber-500/60 to-transparent transition-all duration-500" />
-
                 <div>
                   {/* Icon & Count Header */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:border-amber-500/40 group-hover:bg-amber-500/10 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200/70 flex items-center justify-center text-amber-800 group-hover:scale-110 transition-all duration-300 shadow-xs">
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <Badge variant="outline" className="border-white/[0.1] bg-white/[0.03] text-zinc-400 group-hover:border-amber-500/30 group-hover:text-amber-300 text-[11px] font-mono">
+                    <Badge variant="outline" className="border-stone-200 bg-stone-50 text-stone-600 text-[11px] font-mono">
                       {count} {count === 1 ? 'piece' : 'pieces'}
                     </Badge>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                  <h3 className="font-serif font-bold text-lg text-stone-900 group-hover:text-amber-800 transition-colors flex items-center gap-1.5">
                     {cat.name}
-                    <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+                    <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-amber-700 opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
                   </h3>
 
-                  <p className="text-xs text-zinc-400 leading-relaxed mt-2 line-clamp-2">
+                  <p className="text-xs text-stone-500 leading-relaxed mt-2 line-clamp-2">
                     {meta.desc}
                   </p>
 
@@ -194,7 +191,7 @@ export default function CategoriesPage() {
                     {meta.regions.map((reg) => (
                       <span
                         key={reg}
-                        className="text-[10px] px-2 py-0.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-zinc-400"
+                        className="text-[10px] px-2 py-0.5 rounded-md bg-stone-50 border border-stone-200 text-stone-600 font-mono"
                       >
                         {reg}
                       </span>
@@ -203,9 +200,9 @@ export default function CategoriesPage() {
                 </div>
 
                 {/* Footer Action */}
-                <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-500 group-hover:text-amber-400 transition-colors">
+                <div className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500 group-hover:text-amber-800 transition-colors">
                   <span className="font-medium">Explore Guild</span>
-                  <span className="text-[11px] font-mono text-zinc-600 group-hover:text-amber-400/80">View collection →</span>
+                  <span className="text-[11px] font-mono text-stone-400 group-hover:text-amber-700">View collection →</span>
                 </div>
               </Link>
             </motion.div>

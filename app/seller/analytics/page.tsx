@@ -22,32 +22,32 @@ import {
 } from 'recharts';
 
 const conversionData = [
-  { stage: 'Specimen Views', value: 1248 },
+  { stage: 'Item Views', value: 1248 },
   { stage: 'Bag Additions', value: 186 },
-  { stage: 'Paid Orders', value: 18 },
+  { stage: 'Delivered Orders', value: 18 },
 ];
 
 const pieData = [
-  { name: 'Kalamkari Handbags', value: 8, color: '#f59e0b' },
-  { name: 'Embroidered Cushion Covers', value: 6, color: '#10b981' },
-  { name: 'Chanderi Silk Sarees', value: 2, color: '#6366f1' },
-  { name: 'Hand-painted Wall Hangings', value: 1, color: '#06b6d4' },
+  { name: 'Kalamkari Bags', value: 8, color: '#E88219' },
+  { name: 'Embroidered Covers', value: 6, color: '#15803D' },
+  { name: 'Chanderi Sarees', value: 2, color: '#147A83' },
+  { name: 'Wall Hangings', value: 1, color: '#C86843' },
 ];
 
 export default function SellerAnalyticsPage() {
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 text-stone-900">
       <div>
-        <h1 className="text-2xl font-bold">Financial Telemetry & Analytics</h1>
-        <p className="text-xs text-zinc-400 mt-1 font-mono">
-          Real-time performance tracking and direct artisan income realization
+        <h1 className="text-2xl font-bold text-stone-900 font-serif">Artisan Income Insights &amp; Analytics</h1>
+        <p className="text-xs text-stone-500 mt-1 font-mono">
+          Real-time performance tracking and direct artisan household income realization
         </p>
       </div>
 
       {/* Metrics Ribbon */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         <StatCard
-          label="Gross Revenue"
+          label="Gross Realization"
           value="₹24,850"
           icon={<IndianRupee className="w-5 h-5" />}
           trend="+18.4%"
@@ -68,7 +68,7 @@ export default function SellerAnalyticsPage() {
           trendUp={true}
         />
         <StatCard
-          label="Conversion Velocity"
+          label="Patron Conversion"
           value="1.44%"
           icon={<TrendingUp className="w-5 h-5" />}
           trend="+0.3%"
@@ -82,15 +82,15 @@ export default function SellerAnalyticsPage() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+          className="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm"
         >
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-semibold text-sm text-white">Net Income Progression</h3>
-              <p className="text-[11px] text-zinc-400 font-mono">Artisan monthly take-home payouts</p>
+              <h3 className="font-semibold text-sm text-stone-900">Net Income Progression</h3>
+              <p className="text-[11px] text-stone-500 font-mono">Monthly take-home disbursements</p>
             </div>
-            <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-              Zero Commission
+            <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-semibold">
+              100% Direct Payout
             </span>
           </div>
 
@@ -98,23 +98,24 @@ export default function SellerAnalyticsPage() {
             <AreaChart data={revenueData}>
               <defs>
                 <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#E88219" stopOpacity={0.25} />
+                  <stop offset="100%" stopColor="#E88219" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.04)" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <CartesianGrid vertical={false} stroke="rgba(42,33,24,0.06)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#78716c' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: '#78716c' }} axisLine={false} tickLine={false} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161922',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #e7e5e4',
                   borderRadius: 12,
                   fontSize: 12,
-                  color: '#fff',
+                  color: '#1c1917',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 }}
               />
-              <Area type="monotone" dataKey="revenue" stroke="#f59e0b" strokeWidth={2.5} fill="url(#revGrad)" />
+              <Area type="monotone" dataKey="revenue" stroke="#E88219" strokeWidth={2.5} fill="url(#revGrad)" />
             </AreaChart>
           </ResponsiveContainer>
         </motion.div>
@@ -124,30 +125,31 @@ export default function SellerAnalyticsPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+          className="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm"
         >
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-semibold text-sm text-white">Order Volume by Month</h3>
-              <p className="text-[11px] text-zinc-400 font-mono">Direct patron acquisitions</p>
+              <h3 className="font-semibold text-sm text-stone-900">Order Volume by Month</h3>
+              <p className="text-[11px] text-stone-500 font-mono">Direct patron acquisitions</p>
             </div>
           </div>
 
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={revenueData}>
-              <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.04)" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: '#71717a' }} axisLine={false} tickLine={false} />
+              <CartesianGrid vertical={false} stroke="rgba(42,33,24,0.06)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#78716c' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: '#78716c' }} axisLine={false} tickLine={false} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161922',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #e7e5e4',
                   borderRadius: 12,
                   fontSize: 12,
-                  color: '#fff',
+                  color: '#1c1917',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 }}
               />
-              <Bar dataKey="orders" fill="#d97706" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="orders" fill="#C86843" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
@@ -160,10 +162,10 @@ export default function SellerAnalyticsPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+          className="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm"
         >
-          <h3 className="font-semibold text-sm text-white mb-1">Patron Conversion Funnel</h3>
-          <p className="text-[11px] text-zinc-400 font-mono mb-4">Visitor retention to purchase completion</p>
+          <h3 className="font-semibold text-sm text-stone-900 mb-1">Patron Purchase Journey</h3>
+          <p className="text-[11px] text-stone-500 font-mono mb-4">From initial view to confirmed acquisition</p>
 
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={conversionData} layout="vertical">
@@ -171,23 +173,24 @@ export default function SellerAnalyticsPage() {
               <YAxis
                 dataKey="stage"
                 type="category"
-                tick={{ fontSize: 11, fill: '#a1a1aa' }}
+                tick={{ fontSize: 11, fill: '#57534e' }}
                 axisLine={false}
                 tickLine={false}
-                width={100}
+                width={120}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161922',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #e7e5e4',
                   borderRadius: 12,
                   fontSize: 12,
-                  color: '#fff',
+                  color: '#1c1917',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 }}
               />
               <Bar dataKey="value" radius={[0, 6, 6, 0]}>
                 {conversionData.map((_, i) => (
-                  <Cell key={i} fill={['#f59e0b', '#d97706', '#10b981'][i]} />
+                  <Cell key={i} fill={['#E88219', '#C86843', '#15803D'][i]} />
                 ))}
               </Bar>
             </BarChart>
@@ -199,10 +202,10 @@ export default function SellerAnalyticsPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="p-5 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+          className="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm"
         >
-          <h3 className="font-semibold text-sm text-white mb-1">Revenue Share by Craft Line</h3>
-          <p className="text-[11px] text-zinc-400 font-mono mb-2">Category distribution</p>
+          <h3 className="font-semibold text-sm text-stone-900 mb-1">Revenue Share by Craft Line</h3>
+          <p className="text-[11px] text-stone-500 font-mono mb-2">Category distribution</p>
 
           <ResponsiveContainer width="100%" height={150}>
             <PieChart>
@@ -222,11 +225,12 @@ export default function SellerAnalyticsPage() {
               </Pie>
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161922',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #e7e5e4',
                   borderRadius: 12,
                   fontSize: 12,
-                  color: '#fff',
+                  color: '#1c1917',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 }}
               />
             </PieChart>
@@ -234,8 +238,8 @@ export default function SellerAnalyticsPage() {
 
           <div className="flex flex-wrap gap-3 mt-1 justify-center">
             {pieData.map((d) => (
-              <span key={d.name} className="flex items-center gap-1.5 text-[11px] text-zinc-300">
-                <span className="w-2 h-2 rounded-full" style={{ background: d.color }} />
+              <span key={d.name} className="flex items-center gap-1.5 text-[11px] text-stone-600">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: d.color }} />
                 <span>{d.name}</span>
               </span>
             ))}
@@ -243,35 +247,35 @@ export default function SellerAnalyticsPage() {
         </motion.div>
       </div>
 
-      {/* AI Actionable Directives */}
+      {/* Helpful Actionable Insights */}
       <div className="space-y-2.5">
-        <h3 className="font-semibold text-xs text-zinc-400 uppercase tracking-wider font-mono">
-          Automated Revenue Directives
+        <h3 className="font-semibold text-xs text-stone-500 uppercase tracking-wider font-mono">
+          Artisan Growth Insights
         </h3>
         {[
           {
             title: 'Kalamkari Demand Spurt',
-            text: 'Your Kalamkari bags are generating 34% more views than regional craft baseline. High probability of price elasticity up to ₹1,750.',
+            text: 'Your Kalamkari bags are receiving 34% more patron inquiries than the regional baseline. There is strong pricing room up to ₹1,750.',
             tag: 'Pricing Opportunity',
           },
           {
-            title: 'Bundle Opportunity',
-            text: 'Cushion covers are viewed in pairs 68% of the time. Adding a "Set of 2" listing will increase average order value by ₹800.',
+            title: 'Craft Bundle Suggestion',
+            text: 'Cushion covers are viewed in pairs 68% of the time. Creating a "Set of 2" listing can increase average order value by ₹800.',
             tag: 'Catalog Strategy',
           },
         ].map((item, i) => (
-          <div key={i} className="p-4 rounded-2xl bg-[#10121A] border border-white/[0.08] flex items-start gap-3.5">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 mt-0.5">
+          <div key={i} className="p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex items-start gap-3.5">
+            <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shrink-0 mt-0.5">
               <Zap className="w-4 h-4" />
             </div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <p className="text-xs font-bold text-white">{item.title}</p>
-                <span className="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                <p className="text-xs font-bold text-stone-900">{item.title}</p>
+                <span className="text-[10px] font-mono text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full font-semibold">
                   {item.tag}
                 </span>
               </div>
-              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">{item.text}</p>
+              <p className="text-xs text-stone-600 mt-1 leading-relaxed">{item.text}</p>
             </div>
           </div>
         ))}

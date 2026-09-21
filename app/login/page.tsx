@@ -15,12 +15,12 @@ import {
   ArrowRight,
   Smartphone,
   User,
-  Shield,
   Zap,
   Award,
   CheckCircle2,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function LoginPage() {
     setLoading(true);
     setTimeout(() => {
       login();
-      toast.success('Successfully authenticated');
+      toast.success('Successfully signed in');
       router.push('/');
     }, 600);
   };
@@ -55,91 +55,91 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col text-white selection:bg-amber-500/20 selection:text-amber-300">
+    <div className="min-h-screen relative flex flex-col text-stone-900 selection:bg-amber-100 selection:text-amber-900">
       <AnimatedBackground variant="default" />
 
       {/* Top Bar */}
-      <header className="relative z-20 flex items-center justify-between px-6 sm:px-12 py-5 border-b border-white/[0.06] bg-[#08090D]/60 backdrop-blur-xl">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-            <Sparkles className="w-4 h-4 text-black font-bold" />
+      <header className="relative z-20 flex items-center justify-between px-6 sm:px-12 py-4 border-b border-stone-200/90 bg-[#FAF7F2]/90 backdrop-blur-xl">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+            <Sparkles className="w-4 h-4 text-white font-bold" />
           </div>
-          <span className="font-bold text-lg tracking-tight text-white">Hastkala</span>
-        </div>
+          <span className="font-serif font-bold text-xl tracking-tight text-stone-900">Hastkala</span>
+        </Link>
         <LanguageSelector compact />
       </header>
 
       {/* Main Container */}
       <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-12 py-12">
         <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Brand & Competition Credentials */}
+          {/* Left Column: Brand & Credentials */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="hidden lg:block space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-semibold text-amber-400">
-              <Award className="w-3.5 h-3.5" />
-              <span>Smart India Hackathon SIH26090 Platform</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-xs font-semibold text-amber-900">
+              <Award className="w-3.5 h-3.5 text-amber-700" />
+              <span>Modern Indian Handicrafts Platform</span>
             </div>
 
-            <h1 className="text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Autonomous Market Linkage for{' '}
-              <span className="heritage-text-gradient">India&apos;s Artisans.</span>
+            <h1 className="text-4xl xl:text-5xl font-serif font-extrabold tracking-tight text-stone-900 leading-tight">
+              Direct Global Linkage for{' '}
+              <span className="festive-text-gradient">India&apos;s Artisans.</span>
             </h1>
 
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Bridging the gap between rural craftsmanship and global collectors through computer vision, automated catalog generation, and fair pricing intelligence.
+            <p className="text-base text-stone-600 leading-relaxed">
+              Bridging traditional indigenous craftsmanship with global patrons through camera-first cataloging, automated multilingual translation, and direct fair-trade realization.
             </p>
 
-            {/* Quick Demo Credentials Box for Hackathon Evaluators */}
-            <div className="p-5 rounded-2xl bg-[#10121A] border border-amber-500/30 space-y-3">
+            {/* Quick Demo Credentials Box */}
+            <div className="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-                  <Zap className="w-3.5 h-3.5" /> Judge & Demo Fast Pass
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-600" /> Fast Demo Access
                 </span>
-                <span className="text-[10px] text-zinc-400 font-mono">Instant Entry</span>
+                <span className="text-[10px] text-stone-500 font-mono">Instant Entry</span>
               </div>
-              <p className="text-xs text-zinc-400">
-                Click below to instantly launch pre-loaded demo profiles without typing passwords:
+              <p className="text-xs text-stone-600">
+                Choose a pre-configured role below to test the complete user flow without manual entry:
               </p>
               <div className="grid sm:grid-cols-2 gap-2.5 pt-1">
                 <button
                   onClick={() => handleQuickLogin('seller', 'Lakshmi Devi (Artisan)')}
                   disabled={loading}
-                  className="flex items-center justify-between p-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-medium transition-all text-left"
+                  className="flex items-center justify-between p-3 rounded-xl bg-amber-50 hover:bg-amber-100/80 border border-amber-200 text-amber-900 text-xs font-medium transition-all text-left shadow-xs"
                 >
                   <div>
-                    <p className="font-bold text-amber-400">Artisan Studio</p>
-                    <p className="text-[10px] text-zinc-400 mt-0.5">Lakshmi Devi · Kalamkari</p>
+                    <p className="font-bold text-amber-900">Artisan Studio</p>
+                    <p className="text-[10px] text-amber-700 mt-0.5">Lakshmi Devi · Kalamkari</p>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 shrink-0 ml-1" />
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0 ml-1 text-amber-700" />
                 </button>
 
                 <button
-                  onClick={() => handleQuickLogin('buyer', 'Aarav Sharma (Buyer)')}
+                  onClick={() => handleQuickLogin('buyer', 'Aarav Sharma (Patron)')}
                   disabled={loading}
-                  className="flex items-center justify-between p-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-medium transition-all text-left"
+                  className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 text-emerald-900 text-xs font-medium transition-all text-left shadow-xs"
                 >
                   <div>
-                    <p className="font-bold text-emerald-400">Buyer Marketplace</p>
-                    <p className="text-[10px] text-zinc-400 mt-0.5">Aarav Sharma · Patron</p>
+                    <p className="font-bold text-emerald-900">Patron Marketplace</p>
+                    <p className="text-[10px] text-emerald-700 mt-0.5">Aarav Sharma · Patron</p>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 shrink-0 ml-1" />
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0 ml-1 text-emerald-700" />
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               {[
-                'Real-time Computer Vision Scan',
-                'Fair Price Elasticity Engine',
+                'Real-time Camera Catalog Scanner',
+                'Fair Price Recommendation Engine',
                 'Multilingual Indic Voice Support',
-                'GI Tagged Provenance Tracking',
+                'Authentic GI Heritage Certification',
               ].map((pill) => (
-                <div key={pill} className="flex items-center gap-2 text-xs text-zinc-400">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <div key={pill} className="flex items-center gap-2 text-xs text-stone-600">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>{pill}</span>
                 </div>
               ))}
@@ -153,15 +153,15 @@ export default function LoginPage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="w-full max-w-md mx-auto"
           >
-            <div className="relative overflow-hidden rounded-3xl bg-[#10121A]/90 backdrop-blur-2xl border border-white/[0.08] shadow-2xl p-7 sm:p-8">
+            <div className="relative overflow-hidden rounded-3xl bg-white border border-stone-200 shadow-xl p-7 sm:p-8">
               {/* Header Mode Toggle */}
-              <div className="flex gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.06] mb-6">
+              <div className="flex gap-1 p-1 rounded-xl bg-[#FAF7F2] border border-stone-200 mb-6">
                 <button
                   onClick={() => setMode('login')}
                   className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
                     mode === 'login'
-                      ? 'bg-amber-500 text-black shadow-md'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-amber-600 text-white shadow-xs font-bold'
+                      : 'text-stone-600 hover:text-stone-900'
                   }`}
                 >
                   Sign In
@@ -170,8 +170,8 @@ export default function LoginPage() {
                   onClick={() => setMode('signup')}
                   className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
                     mode === 'signup'
-                      ? 'bg-amber-500 text-black shadow-md'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-amber-600 text-white shadow-xs font-bold'
+                      : 'text-stone-600 hover:text-stone-900'
                   }`}
                 >
                   Create Account
@@ -179,10 +179,10 @@ export default function LoginPage() {
               </div>
 
               <div className="mb-6">
-                <h2 className="text-xl font-bold text-white">
-                  {mode === 'login' ? 'Access your Hastkala workspace' : 'Join the artisan revolution'}
+                <h2 className="text-xl font-serif font-bold text-stone-900">
+                  {mode === 'login' ? 'Access your Hastkala workspace' : 'Join the artisan community'}
                 </h2>
-                <p className="text-xs text-zinc-400 mt-1">
+                <p className="text-xs text-stone-500 mt-1">
                   {mode === 'login'
                     ? 'Enter your credentials to continue.'
                     : 'Create your digital craft identity in seconds.'}
@@ -195,21 +195,21 @@ export default function LoginPage() {
                   onClick={() => setMethod('email')}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all border ${
                     method === 'email'
-                      ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
-                      : 'border-white/[0.08] text-zinc-400 hover:border-white/20'
+                      ? 'border-amber-400 bg-amber-50 text-amber-900 font-semibold'
+                      : 'border-stone-200 text-stone-600 hover:border-stone-300'
                   }`}
                 >
-                  <Mail className="w-3.5 h-3.5" /> Email
+                  <Mail className="w-3.5 h-3.5 text-amber-700" /> Email
                 </button>
                 <button
                   onClick={() => setMethod('phone')}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all border ${
                     method === 'phone'
-                      ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
-                      : 'border-white/[0.08] text-zinc-400 hover:border-white/20'
+                      ? 'border-amber-400 bg-amber-50 text-amber-900 font-semibold'
+                      : 'border-stone-200 text-stone-600 hover:border-stone-300'
                   }`}
                 >
-                  <Smartphone className="w-3.5 h-3.5" /> Mobile OTP
+                  <Smartphone className="w-3.5 h-3.5 text-amber-700" /> Mobile OTP
                 </button>
               </div>
 
@@ -217,16 +217,16 @@ export default function LoginPage() {
               <form onSubmit={handleLogin} className="space-y-4">
                 {mode === 'signup' && (
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 mb-1.5">Full Name</label>
+                    <label className="block text-xs font-medium text-stone-700 mb-1.5">Full Name</label>
                     <div className="relative">
-                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
                       <input
                         type="text"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Lakshmi Devi"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-amber-500/50 transition-all placeholder:text-zinc-600"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-[#FAF7F2] text-sm text-stone-900 focus:outline-none focus:border-amber-600 transition-all placeholder:text-stone-400"
                       />
                     </div>
                   </div>
@@ -234,31 +234,31 @@ export default function LoginPage() {
 
                 {method === 'email' ? (
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 mb-1.5">Email Address</label>
+                    <label className="block text-xs font-medium text-stone-700 mb-1.5">Email Address</label>
                     <div className="relative">
-                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="artisan@hastkala.in"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-amber-500/50 transition-all placeholder:text-zinc-600"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-[#FAF7F2] text-sm text-stone-900 focus:outline-none focus:border-amber-600 transition-all placeholder:text-stone-400"
                       />
                     </div>
                   </div>
                 ) : (
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 mb-1.5">Mobile Number (India)</label>
+                    <label className="block text-xs font-medium text-stone-700 mb-1.5">Mobile Number (India)</label>
                     <div className="relative">
-                      <Smartphone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                      <Smartphone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
                       <input
                         type="tel"
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+91 98480 22334"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-amber-500/50 transition-all placeholder:text-zinc-600"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-[#FAF7F2] text-sm text-stone-900 focus:outline-none focus:border-amber-600 transition-all placeholder:text-stone-400"
                       />
                     </div>
                   </div>
@@ -266,27 +266,28 @@ export default function LoginPage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-medium text-zinc-400">Password</label>
+                    <label className="block text-xs font-medium text-stone-700">Password</label>
                     {mode === 'login' && (
-                      <button type="button" className="text-xs text-amber-400 hover:underline">
+                      <button type="button" className="text-xs text-amber-700 hover:underline">
                         Forgot?
                       </button>
                     )}
                   </div>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••••"
-                      className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-sm text-white focus:outline-none focus:border-amber-500/50 transition-all placeholder:text-zinc-600"
+                      className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-stone-200 bg-[#FAF7F2] text-sm text-stone-900 focus:outline-none focus:border-amber-600 transition-all placeholder:text-stone-400"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -296,10 +297,10 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all disabled:opacity-50 mt-2"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm shadow-md shadow-amber-600/20 transition-all disabled:opacity-50 mt-2 active:scale-95"
                 >
                   {loading ? (
-                    <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
                       <span>{mode === 'login' ? 'Sign In to Workspace' : 'Create Account'}</span>
@@ -309,19 +310,19 @@ export default function LoginPage() {
                 </button>
               </form>
 
-              {/* Mobile Judge Quick Entry */}
-              <div className="lg:hidden mt-6 pt-5 border-t border-white/[0.08] space-y-2">
-                <p className="text-[11px] font-mono text-amber-400 font-semibold">⚡ Judge 1-Click Fast Pass:</p>
+              {/* Mobile Quick Entry */}
+              <div className="lg:hidden mt-6 pt-5 border-t border-stone-100 space-y-2">
+                <p className="text-[11px] font-mono text-amber-800 font-semibold">⚡ 1-Click Fast Demo Access:</p>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => handleQuickLogin('seller', 'Lakshmi Devi')}
-                    className="py-2 px-2.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-medium text-center"
+                    className="py-2 px-2.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 text-xs font-semibold text-center hover:bg-amber-100"
                   >
                     Artisan Login
                   </button>
                   <button
                     onClick={() => handleQuickLogin('buyer', 'Aarav Sharma')}
-                    className="py-2 px-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium text-center"
+                    className="py-2 px-2.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-semibold text-center hover:bg-emerald-100"
                   >
                     Buyer Login
                   </button>

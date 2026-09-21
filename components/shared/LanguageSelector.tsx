@@ -27,14 +27,14 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          'flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 hover:text-white transition-all',
+          'flex items-center gap-2 rounded-xl border border-stone-200/90 bg-white/80 hover:bg-stone-100/80 text-stone-700 hover:text-stone-900 shadow-sm transition-all',
           compact ? 'px-3 py-1.5 text-xs' : 'px-3.5 py-2 text-sm'
         )}
         aria-label="Select Language"
       >
-        <Globe className="w-3.5 h-3.5 text-amber-400" />
+        <Globe className="w-3.5 h-3.5 text-amber-600" />
         <span className="font-medium">{current?.nativeName || 'English'}</span>
-        <ChevronDown className={cn('w-3.5 h-3.5 text-zinc-400 transition-transform duration-200', open && 'rotate-180')} />
+        <ChevronDown className={cn('w-3.5 h-3.5 text-stone-500 transition-transform duration-200', open && 'rotate-180')} />
       </button>
 
       <AnimatePresence>
@@ -44,10 +44,10 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 mt-2 w-52 rounded-2xl border border-white/10 bg-[#10121A]/95 backdrop-blur-2xl shadow-2xl z-50 overflow-hidden divide-y divide-white/[0.05]"
+            className="absolute right-0 mt-2 w-52 rounded-2xl border border-stone-200 bg-white/95 backdrop-blur-2xl shadow-xl z-50 overflow-hidden divide-y divide-stone-100"
           >
-            <div className="p-2.5 bg-white/[0.02]">
-              <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-2">
+            <div className="p-2.5 bg-stone-50/80">
+              <p className="text-[10px] font-semibold text-stone-500 uppercase tracking-wider px-2">
                 Supported Indic Languages
               </p>
             </div>
@@ -63,15 +63,15 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
                   className={cn(
                     'w-full flex items-center justify-between px-3 py-2 text-xs rounded-xl transition-colors text-left',
                     language === lang.code
-                      ? 'bg-amber-500/10 text-amber-300 font-semibold'
-                      : 'text-zinc-300 hover:bg-white/[0.04]'
+                      ? 'bg-amber-50 text-amber-900 font-semibold'
+                      : 'text-stone-700 hover:bg-stone-50'
                   )}
                 >
                   <div>
                     <span className="font-medium">{lang.nativeName}</span>
-                    <span className="text-[10px] text-zinc-500 ml-1.5 font-mono">({lang.name})</span>
+                    <span className="text-[10px] text-stone-400 ml-1.5 font-mono">({lang.name})</span>
                   </div>
-                  {language === lang.code && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                  {language === lang.code && <Check className="w-3.5 h-3.5 text-amber-700" />}
                 </button>
               ))}
             </div>

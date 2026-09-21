@@ -4,51 +4,46 @@
 
 @layer base {
   :root {
-    --background: 230 25% 5%;
-    --foreground: 210 40% 98%;
-    --card: 230 20% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 230 20% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 38 92% 50%;
+    --background: 38 30% 97%;
+    --foreground: 28 14% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 28 14% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 28 14% 11%;
+    --primary: 32 84% 48%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 230 16% 14%;
-    --secondary-foreground: 210 20% 90%;
-    --muted: 230 16% 14%;
-    --muted-foreground: 215 16% 65%;
-    --accent: 38 92% 50%;
+    --secondary: 35 25% 93%;
+    --secondary-foreground: 28 14% 16%;
+    --muted: 35 25% 93%;
+    --muted-foreground: 30 9% 43%;
+    --accent: 32 84% 48%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 230 16% 15%;
-    --input: 230 16% 15%;
-    --ring: 38 92% 50%;
-    --chart-1: 38 92% 50%;
-    --chart-2: 160 84% 39%;
-    --chart-3: 190 90% 50%;
-    --chart-4: 250 85% 65%;
-    --chart-5: 340 75% 55%;
-    --radius: 0.875rem;
-
-    --saffron: 38 92% 50%;
-    --magenta: 330 75% 55%;
-    --turquoise: 175 75% 42%;
-    --royal: 225 75% 58%;
-    --coral: 15 85% 60%;
-    --indigo: 240 60% 60%;
-    --teal: 165 70% 40%;
-    --gold: 45 95% 55%;
+    --border: 33 18% 88%;
+    --input: 33 18% 88%;
+    --ring: 32 84% 48%;
+    --chart-1: 32 84% 48%;
+    --chart-2: 185 70% 30%;
+    --chart-3: 15 65% 50%;
+    --chart-4: 215 50% 35%;
+    --chart-5: 340 68% 45%;
+    --radius: 1rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
+  *:focus-visible {
+    outline: 2px solid #E88219;
+    outline-offset: 2px;
+  }
+
   body {
-    @apply bg-[#08090D] text-foreground antialiased;
+    @apply bg-[#FAF7F2] text-[#1E1B18] antialiased;
     font-feature-settings: "rlig" 1, "calt" 1, "cv02" 1, "cv03" 1, "cv04" 1;
-    color-scheme: dark;
+    color-scheme: light;
   }
 }
 
@@ -56,6 +51,7 @@
   .text-balance {
     text-wrap: balance;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -63,39 +59,84 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .glass-panel {
-    background: rgba(14, 16, 23, 0.72);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Decorative Indian Craft Textures (CSS-only, high performance) */
+  .pattern-weaving {
+    background-color: transparent;
+    background-image: 
+      radial-gradient(rgba(184, 93, 54, 0.06) 0.75px, transparent 0.75px),
+      radial-gradient(rgba(30, 27, 24, 0.04) 0.75px, transparent 0.75px);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
   }
-  .glass-card {
-    background: rgba(17, 20, 29, 0.65);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .pattern-blockprint {
+    background-color: transparent;
+    background-image: radial-gradient(circle at 50% 50%, rgba(232, 130, 25, 0.06) 1.5px, transparent 1.5px),
+                      radial-gradient(circle at 0% 0%, rgba(20, 122, 131, 0.05) 1.5px, transparent 1.5px),
+                      radial-gradient(circle at 100% 100%, rgba(194, 53, 103, 0.04) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
   }
-  .glass-card:hover {
-    background: rgba(22, 26, 38, 0.85);
-    border-color: rgba(255, 255, 255, 0.14);
+
+  .pattern-rangoli {
+    background-image: 
+      linear-gradient(45deg, rgba(232, 130, 25, 0.03) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(232, 130, 25, 0.03) 25%, transparent 25%),
+      linear-gradient(135deg, rgba(232, 130, 25, 0.03) 25%, transparent 25%),
+      linear-gradient(-135deg, rgba(232, 130, 25, 0.03) 25%, transparent 25%);
+    background-size: 24px 24px;
   }
-  .heritage-gradient {
-    background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #EA580C 100%);
+
+  .pattern-craftpaper {
+    background-color: #FAF7F2;
+    background-image: 
+      radial-gradient(rgba(42, 33, 24, 0.04) 1px, transparent 0),
+      radial-gradient(rgba(200, 104, 67, 0.03) 1px, transparent 0);
+    background-size: 20px 20px, 40px 40px;
   }
-  .heritage-text-gradient {
-    background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #FB923C 100%);
+
+  /* Festival gradients */
+  .festive-hero-gradient {
+    background: linear-gradient(135deg, #E88219 0%, #F25C19 45%, #C86843 100%);
+  }
+
+  .festive-text-gradient {
+    background: linear-gradient(135deg, #B0530A 0%, #D9531E 45%, #872344 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .heritage-border-glow {
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2), 0 0 20px -5px rgba(245, 158, 11, 0.15);
+
+  .peacock-text-gradient {
+    background: linear-gradient(135deg, #147A83 0%, #15636B 60%, #174449 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  .tech-grid {
-    background-size: 32px 32px;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+
+  .editorial-title {
+    font-family: ui-serif, 'Newsreader', 'Playfair Display', Georgia, Cambria, serif;
+    letter-spacing: -0.02em;
+  }
+
+  .craft-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(42, 33, 24, 0.09);
+    box-shadow: 0 1px 3px rgba(42, 33, 24, 0.03), 0 4px 12px -2px rgba(42, 33, 24, 0.04);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .craft-card:hover {
+    box-shadow: 0 12px 28px -4px rgba(42, 33, 24, 0.09), 0 2px 8px -2px rgba(232, 130, 25, 0.08);
+    border-color: rgba(232, 130, 25, 0.35);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -108,9 +149,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(42, 33, 24, 0.16);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(232, 130, 25, 0.4);
 }

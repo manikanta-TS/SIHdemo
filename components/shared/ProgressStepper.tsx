@@ -24,10 +24,10 @@ export function ProgressStepper({
                 className={cn(
                   'w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-xs transition-all duration-300',
                   isDone
-                    ? 'bg-emerald-500/20 border border-emerald-500/50 text-emerald-400'
+                    ? 'bg-emerald-50 border border-emerald-500/40 text-emerald-700'
                     : isActive
-                    ? 'bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.6)] scale-110 font-black'
-                    : 'bg-white/[0.04] border border-white/[0.08] text-zinc-500'
+                    ? 'bg-amber-500 text-[#1A1715] shadow-editorial-sm scale-110 font-black'
+                    : 'bg-[#FAF8F5] border border-[#E7E3DA] text-[#8E887F]'
                 )}
               >
                 {isDone ? <Check className="w-3.5 h-3.5 stroke-[2.5]" /> : i + 1}
@@ -36,10 +36,10 @@ export function ProgressStepper({
                 className={cn(
                   'text-[11px] font-medium tracking-tight hidden md:block transition-colors',
                   isActive
-                    ? 'text-amber-300 font-semibold'
+                    ? 'text-amber-800 font-bold'
                     : isDone
-                    ? 'text-zinc-300'
-                    : 'text-zinc-500'
+                    ? 'text-[#1A1715]'
+                    : 'text-[#8E887F]'
                 )}
               >
                 {step}
@@ -47,9 +47,9 @@ export function ProgressStepper({
             </div>
 
             {i < steps.length - 1 && (
-              <div className="flex-1 h-[2px] mx-2 bg-white/[0.08] rounded-full overflow-hidden">
+              <div className="flex-1 h-[2px] mx-2 bg-[#E7E3DA] rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-amber-500 to-amber-400"
+                  className="h-full bg-gradient-to-r from-amber-500 to-amber-600"
                   initial={{ width: '0%' }}
                   animate={{ width: isDone ? '100%' : '0%' }}
                   transition={{ duration: 0.4 }}

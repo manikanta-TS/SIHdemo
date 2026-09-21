@@ -15,16 +15,11 @@ import {
   ArrowRight,
   ShoppingBag,
   ShieldCheck,
-  MapPin,
   CreditCard,
   Smartphone,
   Banknote,
   Check,
-  Package,
   Truck,
-  Sparkles,
-  QrCode,
-  Award,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -72,54 +67,54 @@ export default function CartPage() {
       clearCart();
       setIsPaying(false);
       setOrderPlaced(true);
-      toast.success('Order successfully placed and routed to artisan!');
-    }, 1800);
+      toast.success('Order placed! Directly routed to artisan guild.');
+    }, 1600);
   };
 
   if (orderPlaced) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center text-white">
+      <div className="min-h-[70vh] flex items-center justify-center text-stone-900">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="text-center max-w-lg p-8 rounded-3xl bg-[#10121A] border border-emerald-500/30 shadow-2xl space-y-5"
+          className="text-center max-w-lg p-8 sm:p-10 rounded-3xl bg-white border border-stone-200/90 shadow-xl space-y-5"
         >
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-sm">
             <Check className="w-8 h-8" />
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold text-white">Order Confirmed & Escrow Funded!</h1>
-            <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto leading-relaxed">
-              Your patronage directly supports traditional master artisans. Your order has been transmitted directly to their village workshops.
+            <h1 className="text-2xl font-serif font-bold text-stone-900">Order Confirmed &amp; Artisan Guaranteed</h1>
+            <p className="text-xs text-stone-500 mt-1 max-w-sm mx-auto leading-relaxed">
+              Your patronage directly supports traditional master artisans. Your order has been transmitted directly to their workshop.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-left space-y-2 text-xs font-mono">
+          <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-stone-200 text-left space-y-2 text-xs font-mono">
             <div className="flex justify-between">
-              <span className="text-zinc-500">Order Reference:</span>
-              <span className="font-bold text-amber-400">{generatedOrderId}</span>
+              <span className="text-stone-500">Order Reference:</span>
+              <span className="font-bold text-amber-800">{generatedOrderId}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-500">Direct Artisan Fund:</span>
-              <span className="text-emerald-400 font-bold">₹{directArtisanAmount.toLocaleString('en-IN')} (78%)</span>
+              <span className="text-stone-500">Direct Artisan Share:</span>
+              <span className="text-emerald-800 font-bold">₹{directArtisanAmount.toLocaleString('en-IN')} (78%)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-500">Total Settled:</span>
-              <span className="font-bold text-white">₹{total.toLocaleString('en-IN')}</span>
+              <span className="text-stone-500">Total Settled:</span>
+              <span className="font-bold text-stone-900">₹{total.toLocaleString('en-IN')}</span>
             </div>
           </div>
 
           <div className="flex gap-2.5 pt-2">
             <Link
               href="/buyer/orders"
-              className="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shadow-lg shadow-amber-500/20 transition-all text-center"
+              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/20 transition-all text-center"
             >
-              Track Live Timeline
+              Track Order Status
             </Link>
             <Link
               href="/buyer/explore"
-              className="flex-1 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 font-semibold text-xs border border-white/[0.08] text-center transition-colors"
+              className="flex-1 py-3 rounded-xl bg-white hover:bg-stone-50 text-stone-700 font-semibold text-xs border border-stone-200 text-center transition-colors shadow-sm"
             >
               Continue Exploring
             </Link>
@@ -131,20 +126,21 @@ export default function CartPage() {
 
   if (cartProducts.length === 0) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center text-white">
+      <div className="min-h-[60vh] flex items-center justify-center text-stone-900">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4 max-w-sm">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-500">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shadow-sm">
             <ShoppingBag className="w-7 h-7" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white">Your patronage bag is empty</h2>
-            <p className="text-xs text-zinc-400 mt-1">Discover certified handmade masterpieces from across India.</p>
+            <h2 className="text-lg font-serif font-bold text-stone-900">Your shopping bag is empty</h2>
+            <p className="text-xs text-stone-500 mt-1">Discover certified handmade crafts from master artisans across India.</p>
           </div>
           <Link
             href="/buyer/explore"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-black font-bold text-xs shadow-md shadow-amber-500/20"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-sm active:scale-95 transition-all"
           >
-            Explore Catalog <ArrowRight className="w-4 h-4" />
+            <span>Explore Collection</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
       </div>
@@ -152,11 +148,11 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 text-white">
+    <div className="max-w-5xl mx-auto space-y-6 text-stone-900">
       <div>
-        <h1 className="text-2xl font-bold">Patron Bag & Ethical Checkout</h1>
-        <p className="text-xs text-zinc-400 mt-1 font-mono">
-          {cart.reduce((s, i) => s + i.quantity, 0)} pieces supporting independent Indian craftspeople
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">Patron Bag &amp; Fair Checkout</h1>
+        <p className="text-xs text-stone-500 mt-1 font-mono">
+          {cart.reduce((s, i) => s + i.quantity, 0)} pieces directly supporting rural artisan families
         </p>
       </div>
 
@@ -168,16 +164,16 @@ export default function CartPage() {
               {cartProducts.map(({ item, product }) => (
                 <div
                   key={product.id}
-                  className="flex gap-4 p-4 rounded-2xl bg-[#10121A] border border-white/[0.08]"
+                  className="flex gap-4 p-4 rounded-2xl bg-white border border-stone-200/90 shadow-sm"
                 >
-                  <Link href={`/buyer/product/${product.id}`} className="relative w-20 h-24 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+                  <Link href={`/buyer/product/${product.id}`} className="relative w-20 h-24 rounded-xl overflow-hidden shrink-0 bg-stone-100 border border-stone-200">
                     <Image src={product.image} alt={product.name} fill className="object-cover" />
                   </Link>
 
                   <div className="flex-1 min-w-0 flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start gap-2">
-                        <Link href={`/buyer/product/${product.id}`} className="font-semibold text-xs text-white hover:text-amber-400 line-clamp-1">
+                        <Link href={`/buyer/product/${product.id}`} className="font-semibold text-xs text-stone-900 hover:text-amber-800 line-clamp-1">
                           {product.name}
                         </Link>
                         <button
@@ -185,32 +181,35 @@ export default function CartPage() {
                             removeFromCart(product.id);
                             toast.info(`Removed ${product.name}`);
                           }}
-                          className="text-zinc-500 hover:text-rose-400 transition-colors"
+                          className="text-stone-400 hover:text-rose-600 transition-colors p-1"
+                          aria-label={`Remove ${product.name} from bag`}
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <p className="text-[11px] text-zinc-400 mt-0.5">By {product.artisanName} · {product.craft}</p>
+                      <p className="text-[11px] text-stone-500 mt-0.5">By {product.artisanName} · {product.craft}</p>
                     </div>
 
                     <div className="flex items-center justify-between pt-2">
-                      <div className="flex items-center gap-1 border border-white/10 rounded-lg p-0.5 bg-white/[0.02]">
+                      <div className="flex items-center gap-1 border border-stone-200 rounded-lg p-0.5 bg-[#FAF7F2]">
                         <button
                           onClick={() => updateCartQty(product.id, item.quantity - 1)}
-                          className="p-1 rounded hover:bg-white/10 text-zinc-400"
+                          className="p-1 rounded hover:bg-stone-200 text-stone-600"
+                          aria-label="Decrease quantity"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="w-6 text-center text-xs font-mono font-bold text-white">{item.quantity}</span>
+                        <span className="w-6 text-center text-xs font-mono font-bold text-stone-900">{item.quantity}</span>
                         <button
                           onClick={() => updateCartQty(product.id, item.quantity + 1)}
-                          className="p-1 rounded hover:bg-white/10 text-zinc-400"
+                          className="p-1 rounded hover:bg-stone-200 text-stone-600"
+                          aria-label="Increase quantity"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
                       </div>
 
-                      <span className="text-sm font-mono font-bold text-white">
+                      <span className="text-sm font-mono font-bold text-stone-900">
                         ₹{(product.price * item.quantity).toLocaleString('en-IN')}
                       </span>
                     </div>
@@ -219,45 +218,45 @@ export default function CartPage() {
               ))}
 
               {/* Economic Impact Badge */}
-              <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 flex items-start gap-3 text-xs text-emerald-300">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-xs text-emerald-900 shadow-xs">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                 <p>
-                  <strong>Direct Economic Guarantee:</strong> ₹{directArtisanAmount.toLocaleString('en-IN')} from this acquisition transfers directly to the artisan&apos;s bank account with zero intermediary commission deductions.
+                  <strong>Direct Artisan Guarantee:</strong> ₹{directArtisanAmount.toLocaleString('en-IN')} from this purchase transfers directly to the artisan&apos;s bank account with zero intermediary commissions.
                 </p>
               </div>
             </div>
 
             {/* Summary & Checkout trigger */}
             <div className="lg:col-span-1">
-              <div className="sticky top-20 p-6 rounded-3xl bg-[#10121A] border border-white/[0.08] space-y-4">
-                <h2 className="font-bold text-sm text-white">Order Valuation</h2>
+              <div className="sticky top-20 p-6 rounded-3xl bg-white border border-stone-200/90 shadow-sm space-y-4">
+                <h2 className="font-serif font-bold text-sm text-stone-900">Order Summary</h2>
                 <div className="space-y-2 text-xs font-mono">
-                  <div className="flex justify-between text-zinc-400">
+                  <div className="flex justify-between text-stone-500">
                     <span>Craft Subtotal</span>
-                    <span className="text-white">₹{cartTotal.toLocaleString('en-IN')}</span>
+                    <span className="text-stone-900">₹{cartTotal.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="flex justify-between text-zinc-400">
-                    <span>Insured Courier</span>
-                    <span className={delivery === 0 ? 'text-emerald-400 font-bold' : 'text-white'}>
+                  <div className="flex justify-between text-stone-500">
+                    <span>Insured Delivery</span>
+                    <span className={delivery === 0 ? 'text-emerald-700 font-bold' : 'text-stone-900'}>
                       {delivery === 0 ? 'FREE' : `₹${delivery}`}
                     </span>
                   </div>
-                  <div className="border-t border-white/[0.08] pt-2 flex justify-between font-bold text-sm text-white">
-                    <span>Gross Total</span>
-                    <span className="text-base text-amber-400">₹{total.toLocaleString('en-IN')}</span>
+                  <div className="border-t border-stone-100 pt-2 flex justify-between font-bold text-sm text-stone-900">
+                    <span>Total Amount</span>
+                    <span className="text-base text-amber-800">₹{total.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setShowCheckout(true)}
-                  className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+                  className="w-full py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/20 transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
-                  <span>Proceed to Dispatch Details</span>
+                  <span>Proceed to Delivery Details</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <p className="text-[10px] text-zinc-500 font-mono text-center flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-emerald-400" /> Insured Escrow Protection
+                <p className="text-[10px] text-stone-500 font-mono text-center flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" /> Authenticity &amp; Safe Transit Guaranteed
                 </p>
               </div>
             </div>
@@ -266,45 +265,45 @@ export default function CartPage() {
           /* Multi-step Checkout */
           <motion.div key="checkout" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-2xl mx-auto space-y-6">
             {/* Step indicators */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+            <div className="flex items-center justify-between pb-4 border-b border-stone-200">
               {['Address & Delivery', 'Payment Settlement'].map((s, i) => (
                 <div key={s} className="flex items-center gap-2 text-xs">
                   <div
                     className={cn(
                       'w-6 h-6 rounded-full flex items-center justify-center font-mono font-bold text-xs',
-                      i + 1 <= checkoutStep ? 'bg-amber-500 text-black' : 'bg-white/10 text-zinc-500'
+                      i + 1 <= checkoutStep ? 'bg-amber-600 text-white' : 'bg-stone-200 text-stone-500'
                     )}
                   >
                     {i + 1}
                   </div>
-                  <span className={i + 1 <= checkoutStep ? 'text-white font-semibold' : 'text-zinc-500'}>{s}</span>
+                  <span className={i + 1 <= checkoutStep ? 'text-stone-900 font-semibold' : 'text-stone-400'}>{s}</span>
                 </div>
               ))}
             </div>
 
             {checkoutStep === 1 && (
-              <div className="p-6 rounded-3xl bg-[#10121A] border border-white/[0.08] space-y-4">
-                <h3 className="font-bold text-sm text-white">Patron Delivery Destination</h3>
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-amber-500/30 space-y-1 text-xs">
+              <div className="p-6 rounded-3xl bg-white border border-stone-200/90 shadow-sm space-y-4">
+                <h3 className="font-serif font-bold text-sm text-stone-900">Delivery Destination</h3>
+                <div className="p-4 rounded-xl bg-[#FAF7F2] border border-amber-200 space-y-1 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-white">Aarav Sharma</span>
-                    <span className="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">Default Residence</span>
+                    <span className="font-bold text-stone-900">Aarav Sharma</span>
+                    <span className="text-[10px] font-mono text-amber-900 bg-amber-100 px-2 py-0.5 rounded font-semibold">Primary Address</span>
                   </div>
-                  <p className="text-zinc-400">24 Lake View Road, Banjara Hills, Hyderabad, Telangana 500034</p>
-                  <p className="text-zinc-500 font-mono">+91 98765 43210</p>
+                  <p className="text-stone-600">24 Lake View Road, Banjara Hills, Hyderabad, Telangana 500034</p>
+                  <p className="text-stone-500 font-mono">+91 98765 43210</p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
+                <div className="p-4 rounded-xl bg-[#FAF7F2] border border-stone-200 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <Truck className="w-4 h-4 text-emerald-400" />
-                    <span className="text-zinc-300">Standard Insured Logistics (5-7 Business Days)</span>
+                    <Truck className="w-4 h-4 text-emerald-700" />
+                    <span className="text-stone-700">Standard Insured Logistics (5-7 Business Days)</span>
                   </div>
-                  <span className="text-emerald-400 font-bold font-mono">INCLUDED</span>
+                  <span className="text-emerald-800 font-bold font-mono">INCLUDED</span>
                 </div>
 
                 <button
                   onClick={() => setCheckoutStep(2)}
-                  className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+                  className="w-full py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/20 transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
                   <span>Select Payment Method</span>
                   <ArrowRight className="w-4 h-4" />
@@ -313,21 +312,21 @@ export default function CartPage() {
             )}
 
             {checkoutStep === 2 && (
-              <div className="p-6 rounded-3xl bg-[#10121A] border border-white/[0.08] space-y-4">
-                <h3 className="font-bold text-sm text-white">Select Direct Settlement Channel</h3>
+              <div className="p-6 rounded-3xl bg-white border border-stone-200/90 shadow-sm space-y-4">
+                <h3 className="font-serif font-bold text-sm text-stone-900">Select Payment Method</h3>
 
                 {isPaying ? (
                   <div className="py-12 text-center space-y-3">
-                    <div className="w-10 h-10 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin mx-auto" />
-                    <p className="text-xs font-mono text-zinc-300">Processing secure UPI escrow transfer...</p>
+                    <div className="w-10 h-10 border-2 border-amber-600/30 border-t-amber-700 rounded-full animate-spin mx-auto" />
+                    <p className="text-xs font-mono text-stone-600">Processing secure UPI payment...</p>
                   </div>
                 ) : (
                   <>
                     <div className="space-y-2">
                       {[
-                        { id: 'upi', label: 'UPI Instant Payout (Google Pay, PhonePe, Paytm)', sub: 'Zero latency escrow transfer', icon: Smartphone },
-                        { id: 'card', label: 'Credit / Debit Card (RuPay, Visa, Mastercard)', sub: '3D Secure encrypted', icon: CreditCard },
-                        { id: 'cod', label: 'Verified Cash on Delivery (COD)', sub: 'Pay upon courier inspection', icon: Banknote },
+                        { id: 'upi', label: 'UPI Instant Pay (Google Pay, PhonePe, Paytm)', sub: 'Instant direct transfer to artisan', icon: Smartphone },
+                        { id: 'card', label: 'Credit / Debit Card (RuPay, Visa, Mastercard)', sub: '3D Secure encrypted transaction', icon: CreditCard },
+                        { id: 'cod', label: 'Cash on Delivery (COD)', sub: 'Pay upon delivery inspection', icon: Banknote },
                       ].map((m) => (
                         <button
                           key={m.id}
@@ -335,37 +334,37 @@ export default function CartPage() {
                           className={cn(
                             'w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all',
                             paymentMethod === m.id
-                              ? 'bg-amber-500/10 border-amber-500/40 text-white'
-                              : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/20'
+                              ? 'bg-amber-50 border-amber-400 text-stone-900 shadow-xs'
+                              : 'bg-[#FAF7F2] border-stone-200 text-stone-600 hover:border-stone-300'
                           )}
                         >
-                          <m.icon className="w-4 h-4 text-amber-400 shrink-0" />
+                          <m.icon className="w-4 h-4 text-amber-700 shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <p className="text-xs font-semibold text-white truncate">{m.label}</p>
-                            <p className="text-[10px] text-zinc-500">{m.sub}</p>
+                            <p className="text-xs font-semibold text-stone-900 truncate">{m.label}</p>
+                            <p className="text-[10px] text-stone-500">{m.sub}</p>
                           </div>
-                          {paymentMethod === m.id && <Check className="w-4 h-4 text-amber-400" />}
+                          {paymentMethod === m.id && <Check className="w-4 h-4 text-amber-700" />}
                         </button>
                       ))}
                     </div>
 
-                    <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs">
-                      <span className="text-zinc-400">Payable Amount:</span>
-                      <span className="text-base font-bold text-amber-400">₹{total.toLocaleString('en-IN')}</span>
+                    <div className="pt-3 border-t border-stone-100 flex items-center justify-between font-mono text-xs">
+                      <span className="text-stone-500">Payable Amount:</span>
+                      <span className="text-base font-bold text-amber-800">₹{total.toLocaleString('en-IN')}</span>
                     </div>
 
                     <div className="flex gap-2 pt-2">
                       <button
                         onClick={() => setCheckoutStep(1)}
-                        className="px-4 py-3 rounded-xl bg-white/[0.04] text-zinc-400 hover:text-white text-xs font-semibold"
+                        className="px-4 py-3 rounded-xl bg-stone-100 text-stone-700 hover:bg-stone-200 text-xs font-semibold transition-colors"
                       >
                         Back
                       </button>
                       <button
                         onClick={handlePayment}
-                        className="flex-1 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
+                        className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/20 transition-all active:scale-95"
                       >
-                        Pay & Fund Artisan ₹{total.toLocaleString('en-IN')}
+                        Confirm &amp; Support Artisan ₹{total.toLocaleString('en-IN')}
                       </button>
                     </div>
                   </>

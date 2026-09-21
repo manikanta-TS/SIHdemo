@@ -23,15 +23,15 @@ export default function ArtisansPage() {
   }, [query, selectedState]);
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 text-stone-900">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Master Artisans of India</h1>
-          <p className="text-xs text-zinc-400 mt-1 font-mono">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">Master Artisans of India</h1>
+          <p className="text-xs text-stone-500 mt-1 font-mono">
             Directly connect with certified generational craftspeople preserving national heritage
           </p>
         </div>
-        <span className="text-xs font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full w-fit">
+        <span className="text-xs font-mono text-amber-900 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full w-fit font-semibold shadow-xs">
           12,480+ Verified Artisans
         </span>
       </div>
@@ -39,13 +39,13 @@ export default function ArtisansPage() {
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search master artisans by name, village, or craft technique..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/40 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-stone-200/90 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-amber-700/60 shadow-sm transition-all"
           />
         </div>
 
@@ -54,10 +54,10 @@ export default function ArtisansPage() {
             <button
               key={st}
               onClick={() => setSelectedState(st)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all border ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all border shadow-xs ${
                 selectedState === st
-                  ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 font-semibold'
-                  : 'bg-white/[0.03] border-white/[0.06] text-zinc-400 hover:border-white/20'
+                  ? 'bg-amber-100/80 border-amber-300 text-amber-900 font-semibold'
+                  : 'bg-white border-stone-200/80 text-stone-600 hover:border-stone-300'
               }`}
             >
               {st === 'all' ? 'All Origin States' : st}

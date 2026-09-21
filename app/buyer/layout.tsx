@@ -13,28 +13,36 @@ import {
   Users,
   Package,
   Heart,
-  ShoppingCart,
+  ShoppingBag,
   User,
   Sparkles,
   ArrowRightLeft,
-  Command,
+  ChevronRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const navItems = [
-  { href: '/buyer', label: 'Marketplace', icon: Home },
-  { href: '/buyer/explore', label: 'Explore Catalog', icon: Search },
-  { href: '/buyer/categories', label: 'Craft Categories', icon: LayoutGrid },
-  { href: '/buyer/artisans', label: 'Master Artisans', icon: Users },
-  { href: '/buyer/orders', label: 'My Orders', icon: Package },
-  { href: '/buyer/wishlist', label: 'Saved Pieces', icon: Heart },
+const mainNavItems = [
+  { href: '/buyer', label: 'Marketplace' },
+  { href: '/buyer/explore', label: 'Explore Catalog' },
+  { href: '/buyer/categories', label: 'Craft Traditions' },
+  { href: '/buyer/artisans', label: 'Master Artisans' },
+  { href: '/buyer/orders', label: 'My Orders' },
+  { href: '/buyer/wishlist', label: 'Saved Pieces' },
+];
+
+const mobileNavItems = [
+  { href: '/buyer', label: 'Home', icon: Home },
+  { href: '/buyer/explore', label: 'Explore', icon: Search },
+  { href: '/buyer/categories', label: 'Traditions', icon: LayoutGrid },
+  { href: '/buyer/artisans', label: 'Artisans', icon: Users },
+  { href: '/buyer/cart', label: 'Cart', icon: ShoppingBag, isCart: true },
 ];
 
 export default function BuyerLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { cartCount, setRole } = useApp();
+  const { cartCount, wishlist, setRole } = useApp();
 
   const handleSwitchRole = () => {
     setRole('seller');
@@ -42,178 +50,199 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen relative text-white bg-[#08090D] flex">
+    <div className="min-h-screen relative text-[#1A1715] bg-[#FBF9F5] flex flex-col selection:bg-amber-100 selection:text-amber-900">
       <AnimatedBackground variant="buyer" />
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 flex-col bg-[#0D0F17]/90 backdrop-blur-2xl border-r border-white/[0.08] z-30">
-        {/* Brand Header */}
-        <div className="p-5 border-b border-white/[0.06]">
-          <Link href="/buyer" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 flex items-center justify-center text-black font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-              <Sparkles className="w-4 h-4 text-black" />
-            </div>
-            <div>
-              <span className="font-bold text-base tracking-tight text-white">Hastkala</span>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                Ethical Marketplace
-              </p>
-            </div>
-          </Link>
-        </div>
-
-        {/* Navigation Items */}
-        <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto">
-          {navItems.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group',
-                  active
-                    ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.1)]'
-                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
-                )}
-              >
-                <div className="flex items-center gap-3">
-                  <item.icon className={cn('w-4 h-4 transition-colors', active ? 'text-amber-400' : 'text-zinc-400 group-hover:text-zinc-200')} />
-                  <span>{item.label}</span>
-                </div>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Footer Actions */}
-        <div className="p-3 border-t border-white/[0.06] space-y-1">
-          <Link
-            href="/buyer/profile"
-            className={cn(
-              'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all',
-              pathname === '/buyer/profile'
-                ? 'bg-white/10 text-white'
-                : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
-            )}
-          >
-            <div className="flex items-center gap-3">
-              <User className="w-4 h-4 text-zinc-400" />
-              <span>Patron Profile</span>
-            </div>
-          </Link>
-
-          <button
-            onClick={handleSwitchRole}
-            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-amber-400 bg-amber-500/5 hover:bg-amber-500/10 border border-amber-500/20 transition-all"
-          >
-            <div className="flex items-center gap-3">
-              <ArrowRightLeft className="w-4 h-4" />
-              <span>Switch to Artisan Mode</span>
-            </div>
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content Area */}
-      <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
-        {/* Top Header */}
-        <header className="sticky top-0 z-20 flex items-center justify-between gap-4 px-5 sm:px-8 py-3.5 bg-[#08090D]/80 backdrop-blur-xl border-b border-white/[0.06]">
-          <div className="flex items-center gap-3 flex-1 max-w-lg">
-            <Link href="/buyer" className="flex items-center gap-2 lg:hidden">
-              <div className="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center text-black font-bold">
-                <Sparkles className="w-3.5 h-3.5" />
+      {/* Editorial Luxury Top Header */}
+      <header className="sticky top-0 z-30 bg-[#FBF9F5]/90 backdrop-blur-xl border-b border-stone-200/80">
+        {/* Tier 1: Brand, Global Search, and Utility Actions */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          {/* Brand Logo & Editorial Seal */}
+          <div className="flex items-center gap-6">
+            <Link href="/buyer" className="flex items-center gap-2.5 group">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                <Sparkles className="w-4 h-4 text-amber-100" />
               </div>
-              <span className="font-bold text-sm text-white">Hastkala</span>
+              <div className="flex flex-col">
+                <span className="font-serif font-bold text-lg tracking-tight text-stone-900 group-hover:text-amber-800 transition-colors">
+                  Hastkala
+                </span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-stone-500 font-sans -mt-0.5">
+                  Patron Portal
+                </span>
+              </div>
             </Link>
+          </div>
 
-            {/* Integrated Search trigger */}
+          {/* Center Search Pill */}
+          <div className="flex-1 max-w-md hidden md:block">
             <button
               onClick={() => {
                 const event = new KeyboardEvent('keydown', { key: 'k', ctrlKey: true });
                 document.dispatchEvent(event);
               }}
-              className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.16] text-xs text-zinc-400 hover:text-white transition-all text-left"
+              className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white border border-stone-200/90 hover:border-amber-700/40 text-xs text-stone-500 hover:text-stone-800 transition-all text-left shadow-sm hover:shadow"
             >
-              <div className="flex items-center gap-2">
-                <Search className="w-3.5 h-3.5 text-zinc-500" />
-                <span className="truncate">Search Kalamkari, Woodcraft, Silk Sarees...</span>
+              <div className="flex items-center gap-2.5">
+                <Search className="w-3.5 h-3.5 text-stone-400" />
+                <span className="truncate">Search Kalamkari, Pashmina, Dhokra, Silks...</span>
               </div>
-              <kbd className="hidden sm:inline-block text-[10px] font-mono bg-white/[0.08] px-1.5 py-0.5 rounded text-zinc-400">
+              <kbd className="text-[10px] font-mono bg-stone-100 px-1.5 py-0.5 rounded text-stone-500 border border-stone-200">
                 ⌘K
               </kbd>
             </button>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          {/* Right Actions */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <LanguageSelector compact />
             <NotificationBell />
 
+            {/* Wishlist Link */}
+            <Link
+              href="/buyer/wishlist"
+              className={cn(
+                'relative p-2 rounded-xl border transition-all',
+                pathname === '/buyer/wishlist'
+                  ? 'bg-amber-50 border-amber-300 text-amber-800'
+                  : 'bg-white/80 border-stone-200/90 hover:bg-stone-100/80 text-stone-700 hover:text-stone-900 shadow-sm'
+              )}
+              aria-label="Saved Pieces"
+            >
+              <Heart className="w-4 h-4" />
+              {wishlist.length > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-stone-900 text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
+                  {wishlist.length}
+                </span>
+              )}
+            </Link>
+
+            {/* Cart Link */}
             <Link
               href="/buyer/cart"
-              className="relative p-2 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-white/[0.16] text-zinc-300 hover:text-white transition-all"
+              className={cn(
+                'relative p-2 rounded-xl border transition-all',
+                pathname === '/buyer/cart'
+                  ? 'bg-amber-50 border-amber-300 text-amber-800'
+                  : 'bg-white/80 border-stone-200/90 hover:bg-stone-100/80 text-stone-700 hover:text-stone-900 shadow-sm'
+              )}
               aria-label="Shopping Cart"
             >
-              <ShoppingCart className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-500 text-black text-[10px] font-bold flex items-center justify-center shadow-md">
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-700 text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
                   {cartCount}
                 </span>
               )}
             </Link>
-          </div>
-        </header>
 
-        {/* Page Content View */}
-        <main className="flex-1 px-4 sm:px-8 py-6 pb-24 lg:pb-12 max-w-7xl w-full mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
+            {/* Profile Link */}
+            <Link
+              href="/buyer/profile"
+              className={cn(
+                'hidden sm:flex items-center gap-1.5 p-2 rounded-xl border transition-all text-xs font-medium',
+                pathname === '/buyer/profile'
+                  ? 'bg-amber-50 border-amber-300 text-amber-800'
+                  : 'bg-white/80 border-stone-200/90 hover:bg-stone-100/80 text-stone-700 hover:text-stone-900 shadow-sm'
+              )}
+              aria-label="Patron Profile"
             >
-              {children}
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
+              <User className="w-4 h-4" />
+            </Link>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#0D0F17]/95 backdrop-blur-2xl border-t border-white/[0.08] px-2 py-2">
+            {/* Role Switcher */}
+            <button
+              onClick={handleSwitchRole}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-amber-900 bg-amber-50 hover:bg-amber-100/80 border border-amber-200/80 shadow-sm transition-all"
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5 text-amber-700" />
+              <span>Artisan Mode</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Tier 2: Editorial Micro-Navigation (Desktop) */}
+        <div className="border-t border-stone-200/60 hidden md:block">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="flex items-center gap-8 h-10 overflow-x-auto scrollbar-hide">
+              {mainNavItems.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      'relative text-xs font-medium tracking-wide transition-colors py-2 whitespace-nowrap',
+                      active
+                        ? 'text-amber-800 font-semibold'
+                        : 'text-stone-600 hover:text-stone-900'
+                    )}
+                  >
+                    <span>{item.label}</span>
+                    {active && (
+                      <motion.div
+                        layoutId="buyerNavIndicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-700 rounded-full"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Page Content */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-12">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pathname}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
+      </main>
+
+      {/* Mobile Bottom Dock Navigation */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-2xl border-t border-stone-200/90 px-3 py-2 shadow-lg">
         <div className="flex items-center justify-around">
-          {navItems.slice(0, 4).map((item) => {
+          {mobileNavItems.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'flex flex-col items-center gap-1 px-3 py-1 rounded-xl transition-all',
-                  active ? 'text-amber-400 font-semibold' : 'text-zinc-500 hover:text-zinc-300'
+                  'flex flex-col items-center gap-1 px-3 py-1 rounded-xl transition-all relative',
+                  active ? 'text-amber-800 font-semibold' : 'text-stone-500 hover:text-stone-800'
                 )}
               >
                 <item.icon className="w-4 h-4" />
-                <span className="text-[10px]">{item.label.split(' ')[0]}</span>
+                <span className="text-[10px] tracking-tight">{item.label}</span>
+                {item.isCart && cartCount > 0 && (
+                  <span className="absolute top-0 right-2 w-3.5 h-3.5 rounded-full bg-amber-700 text-white text-[9px] font-bold flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+                {active && (
+                  <span className="w-1 h-1 rounded-full bg-amber-700 mt-0.5" />
+                )}
               </Link>
             );
           })}
-          <Link
-            href="/buyer/cart"
-            className={cn(
-              'flex flex-col items-center gap-1 px-3 py-1 rounded-xl relative transition-all',
-              pathname === '/buyer/cart' ? 'text-amber-400 font-semibold' : 'text-zinc-500 hover:text-zinc-300'
-            )}
+          <button
+            onClick={handleSwitchRole}
+            className="flex flex-col items-center gap-1 px-3 py-1 rounded-xl text-stone-500 hover:text-stone-800 transition-all"
           >
-            <ShoppingCart className="w-4 h-4" />
-            <span className="text-[10px]">Cart</span>
-            {cartCount > 0 && (
-              <span className="absolute top-0 right-2 w-3.5 h-3.5 rounded-full bg-amber-500 text-black text-[9px] font-bold flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+            <ArrowRightLeft className="w-4 h-4 text-stone-400" />
+            <span className="text-[10px] tracking-tight">Artisan</span>
+          </button>
         </div>
       </nav>
     </div>

@@ -11,9 +11,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Hastkala — AI-Driven Market Linkage for Artisans',
+  title: 'Hastkala — Digital Platform for Indian Mastercraft & Artisans',
   description:
-    'Smart India Hackathon Finalist — Autonomous craft recognition, pricing intelligence, and multilingual digital storefront generation.',
+    'Discover, preserve, and acquire authentic Indian handcrafted masterpieces directly from master artisan lineages with certified geographical indication provenance.',
 };
 
 export default function RootLayout({
@@ -22,12 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${jakarta.className} bg-[#08090D] text-white selection:bg-amber-500/20 selection:text-amber-300 min-h-screen antialiased`}>
+    <html lang="en">
+      <body className={`${jakarta.className} bg-[#FBF9F5] text-[#1A1715] selection:bg-amber-500/20 selection:text-amber-900 min-h-screen antialiased`}>
         <AppProvider>
           {children}
           <CommandPalette />
-          <Toaster theme="dark" position="bottom-right" richColors />
+          <Toaster theme="light" position="bottom-right" richColors />
         </AppProvider>
       </body>
     </html>

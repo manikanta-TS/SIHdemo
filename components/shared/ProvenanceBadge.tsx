@@ -14,11 +14,11 @@ export function ProvenanceBadge({ type = 'gi-tag', label, className }: Provenanc
       return (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 backdrop-blur-md',
+            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-emerald-50 border border-emerald-200 text-emerald-800 shadow-sm',
             className
           )}
         >
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
           {label || 'GI Certified'}
         </span>
       );
@@ -26,11 +26,11 @@ export function ProvenanceBadge({ type = 'gi-tag', label, className }: Provenanc
       return (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-amber-950/60 border border-amber-500/30 text-amber-300 backdrop-blur-md',
+            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-amber-50 border border-amber-200 text-amber-800 shadow-sm',
             className
           )}
         >
-          <Award className="w-3.5 h-3.5 text-amber-400" />
+          <Award className="w-3.5 h-3.5 text-amber-700" />
           {label || 'Master Artisan'}
         </span>
       );
@@ -38,11 +38,11 @@ export function ProvenanceBadge({ type = 'gi-tag', label, className }: Provenanc
       return (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 backdrop-blur-md',
+            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-indigo-50 border border-indigo-200 text-indigo-800 shadow-sm',
             className
           )}
         >
-          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <Sparkles className="w-3.5 h-3.5 text-indigo-700" />
           {label || 'Heritage Technique'}
         </span>
       );
@@ -50,11 +50,11 @@ export function ProvenanceBadge({ type = 'gi-tag', label, className }: Provenanc
       return (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-white/5 border border-white/10 text-zinc-300 backdrop-blur-md',
+            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-stone-100 border border-stone-200 text-stone-700 shadow-sm',
             className
           )}
         >
-          <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
+          <Sparkles className="w-3.5 h-3.5 text-stone-500" />
           {label || '100% Handcrafted'}
         </span>
       );
